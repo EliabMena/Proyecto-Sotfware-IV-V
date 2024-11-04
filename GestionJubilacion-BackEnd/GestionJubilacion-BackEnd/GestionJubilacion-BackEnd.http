@@ -1,0 +1,6 @@
+@GestionJubilacion_BackEnd_HostAddress = http://localhost:5235
+
+GET {{GestionJubilacion_BackEnd_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|d:\\git\\proyecto-sotfware-iv-v\\gestionjubilacion-backend\\gestionjubilacion-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|solutionrelative:gestionjubilacion-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\Program.cs",
+              "RelativeDocumentMoniker": "GestionJubilacion-BackEnd\\Program.cs",
+              "ToolTip": "D:\\Git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\Program.cs",
+              "RelativeToolTip": "GestionJubilacion-BackEnd\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T18:35:11.161Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
