@@ -1,0 +1,3 @@
+Puedes subir en esta carpeta el script de la creacion de la base de datos
+
+Tambien puedes añadir el archivo back_up para restaurarla.
