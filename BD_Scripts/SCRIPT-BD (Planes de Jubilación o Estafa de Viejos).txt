@@ -1,0 +1,147 @@
+-- 1. Creación de Tablas Principales
+-- Tabla Usuarios
+CREATE TABLE Usuarios (
+    id_usuario SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    direccion TEXT,
+    contacto VARCHAR(50),
+    datos_financieros BYTEA, -- Cifrado para mayor seguridad
+    rol VARCHAR(20) CHECK (rol IN ('administrador', 'usuario')) NOT NULL,
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabla Planes de Jubilación
+CREATE TABLE Planes_de_Jubilacion (
+    id_plan SERIAL PRIMARY KEY,
+    tipo_plan VARCHAR(50) NOT NULL,
+    monto_minimo_aportacion NUMERIC(10, 2) NOT NULL,
+    tasa_interes NUMERIC(5, 2) NOT NULL,
+    descripcion TEXT
+);
+-- Tabla Beneficiarios
+CREATE TABLE Beneficiarios (
+    id_beneficiario SERIAL PRIMARY KEY,
+    id_usuario INT REFERENCES Usuarios(id_usuario) ON DELETE CASCADE,
+    nombre_beneficiario VARCHAR(100) NOT NULL,
+    relacion VARCHAR(50),
+    porcentaje_asignado NUMERIC(5, 2) CHECK (porcentaje_asignado <= 100 AND porcentaje_asignado >= 0)
+);
+
+-- Tabla Pagos
+CREATE TABLE Pagos (
+    id_pago SERIAL PRIMARY KEY,
+    id_usuario INT REFERENCES Usuarios(id_usuario) ON DELETE CASCADE,
+    fecha_pago TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    monto NUMERIC(10, 2) NOT NULL,
+    metodo_pago VARCHAR(50),
+    estado VARCHAR(20) CHECK (estado IN ('completado', 'pendiente')) NOT NULL
+);
+-- Tabla Estados de Cuenta
+CREATE TABLE Estados_de_Cuenta (
+    id_estado SERIAL PRIMARY KEY,
+    id_usuario INT REFERENCES Usuarios(id_usuario) ON DELETE CASCADE,
+    saldo_actual NUMERIC(12, 2) DEFAULT 0,
+    aportaciones_realizadas NUMERIC(12, 2) DEFAULT 0,
+    intereses_acumulados NUMERIC(12, 2) DEFAULT 0,
+    ultima_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 2. Creación de Roles y Asignación de Permisos
+
+-- Crea roles para administradores y usuarios
+CREATE ROLE administrador;
+CREATE ROLE usuario;
+
+-- Da permisos a los roles
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO administrador;
+GRANT SELECT ON Usuarios, Planes_de_Jubilacion, Beneficiarios, Pagos, Estados_de_Cuenta TO usuario;
+
+-- 3. Creación de Usuarios Administradores
+--Se crean los admin directo en la BD, así se evita que algún usuario entre como admin
+
+CREATE USER "ADMIN-William" WITH PASSWORD 'admin123' IN ROLE administrador;
+CREATE USER "ADMIN-Eliab" WITH PASSWORD 'admin123' IN ROLE administrador;
+CREATE USER "ADMIN-Luisa" WITH PASSWORD 'admin123' IN ROLE administrador;
+CREATE USER "ADMIN-Ramses" WITH PASSWORD 'admin123' IN ROLE administrador;
+CREATE USER "ADMIN-Profesor" WITH PASSWORD 'admin123' IN ROLE administrador;
+-- 4. Creación de Vistas para Controlar el Acceso
+-- Vista para el Usuario, no mas ve lo suyo 
+CREATE VIEW vista_usuario AS
+SELECT 
+    u.id_usuario, 
+    u.nombre, 
+    p.tipo_plan, 
+    p.monto_minimo_aportacion, 
+    p.tasa_interes, 
+    e.saldo_actual, 
+    e.aportaciones_realizadas, 
+    e.intereses_acumulados, 
+    b.nombre_beneficiario, 
+    b.relacion, 
+    b.porcentaje_asignado
+FROM Usuarios u
+JOIN Planes_de_Jubilacion p ON u.id_usuario = p.id_plan
+JOIN Estados_de_Cuenta e ON u.id_usuario = e.id_usuario
+JOIN Beneficiarios b ON u.id_usuario = b.id_usuario
+WHERE u.nombre = CURRENT_USER;  -- Se usa nombre_usuario en vez de id_usuario
+
+-- Vista de Pagos de el usuario, para que ve lo que debe
+CREATE VIEW vista_pagos_usuario AS
+SELECT 
+    p.id_pago, 
+    p.fecha_pago, 
+    p.monto, 
+    p.metodo_pago, 
+    p.estado
+FROM Pagos p
+JOIN Usuarios u ON p.id_usuario = u.id_usuario
+WHERE u.nombre = CURRENT_USER;
+
+--Vista el admin, literal ve todo (vista bien pinche enorme)
+CREATE VIEW vista_administrador AS
+SELECT 
+    u.id_usuario AS usuario_id, 
+    u.nombre AS usuario_nombre, 
+    u.direccion, 
+    u.contacto, 
+    u.datos_financieros, 
+    u.rol, 
+    u.fecha_registro,
+    pl.id_plan AS plan_id, 
+    pl.tipo_plan, 
+    pl.monto_minimo_aportacion, 
+    pl.tasa_interes, 
+    pl.descripcion,
+    e.id_estado AS estado_id, 
+    e.saldo_actual, 
+    e.aportaciones_realizadas, 
+    e.intereses_acumulados, 
+    e.ultima_actualizacion,
+    b.id_beneficiario AS beneficiario_id, 
+    b.nombre_beneficiario, 
+    b.relacion, 
+    b.porcentaje_asignado,
+    pa.id_pago AS pago_id, 
+    pa.fecha_pago, 
+    pa.monto, 
+    pa.metodo_pago, 
+    pa.estado
+FROM Usuarios u
+LEFT JOIN Planes_de_Jubilacion pl ON u.id_usuario = pl.id_plan
+LEFT JOIN Estados_de_Cuenta e ON u.id_usuario = e.id_usuario
+LEFT JOIN Beneficiarios b ON u.id_usuario = b.id_usuario
+LEFT JOIN Pagos pa ON u.id_usuario = pa.id_usuario;
+
+-- 5. Asignación de Permisos sobre las Vistas
+-- Valida quien puede o no ver las vistas
+GRANT SELECT ON vista_usuario, vista_pagos_usuario TO usuario;
+GRANT SELECT, INSERT, UPDATE, DELETE ON vista_administrador TO administrador;
+
+-- 6. Configuración Adicional de Seguridad
+-- Revocar acceso directo a las tablas principales para el rol de usuario
+REVOKE ALL ON Usuarios, Planes_de_Jubilacion, Beneficiarios, Pagos, Estados_de_Cuenta FROM usuario;
+
+-- Configurar permisos predeterminados para cualquier tabla o secuencia
+-- nueva en el esquema "public" para el rol de administrador
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO administrador;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO administrador;
