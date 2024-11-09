@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionJubilacion-BackEnd")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2db27e6a2867ae47f99075b104091ac0b883e178")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0db96ef145107d920ef2a219f89e300c561a8d3")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionJubilacion-BackEnd")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionJubilacion-BackEnd")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

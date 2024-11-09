@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|d:\\git\\proyecto-sotfware-iv-v\\gestionjubilacion-backend\\gestionjubilacion-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|solutionrelative:gestionjubilacion-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|d:\\git\\proyecto-sotfware-iv-v\\gestionjubilacion-backend\\gestionjubilacion-backend\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|solutionrelative:gestionjubilacion-backend\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "WeatherForecast.cs",
+              "DocumentMoniker": "D:\\Git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\WeatherForecast.cs",
+              "RelativeDocumentMoniker": "GestionJubilacion-BackEnd\\WeatherForecast.cs",
+              "ToolTip": "D:\\Git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\WeatherForecast.cs",
+              "RelativeToolTip": "GestionJubilacion-BackEnd\\WeatherForecast.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-09T14:18:35.011Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
