@@ -22,6 +22,7 @@ namespace GestionJubilacion_BackEnd.Controllers
         public async Task<ActionResult<string>> PostLogin(Login login)
         {
             // Buscar el usuario en la base de datos
+            // y el primer resultado que encuntra lo retorna
             var usuario = await _context.Usuarios
                 .FirstOrDefaultAsync(u => u.nombre == login.Usuario);
 
