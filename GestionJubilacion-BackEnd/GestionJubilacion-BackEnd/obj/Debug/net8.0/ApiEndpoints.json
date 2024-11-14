@@ -14,5 +14,21 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionJubilacion_BackEnd.Controllers.RegistroController",
+    "Method": "Registrar",
+    "RelativePath": "api/Registro",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nuevoUsuario",
+        "Type": "GestionJubilacion_BackEnd.Models.usuario",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

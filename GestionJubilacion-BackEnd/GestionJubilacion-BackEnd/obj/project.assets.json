@@ -2547,19 +2547,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Eliab\\.nuget\\packages\\": {}
+    "C:\\Users\\Ramsito\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj",
+      "projectUniqueName": "C:\\Users\\Ramsito\\Desktop\\git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj",
       "projectName": "GestionJubilacion-BackEnd",
-      "projectPath": "D:\\Git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj",
-      "packagesPath": "C:\\Users\\Eliab\\.nuget\\packages\\",
-      "outputPath": "D:\\Git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\obj\\",
+      "projectPath": "C:\\Users\\Ramsito\\Desktop\\git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj",
+      "packagesPath": "C:\\Users\\Ramsito\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ramsito\\Desktop\\git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Eliab\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ramsito\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2632,7 +2632,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
