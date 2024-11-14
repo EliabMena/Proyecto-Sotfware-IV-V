@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "GestionJubilacion_BackEnd.Controllers.LoginController",
+    "Method": "Login",
+    "RelativePath": "api/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "login",
+        "Type": "GestionJubilacion_BackEnd.Models.usuario",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

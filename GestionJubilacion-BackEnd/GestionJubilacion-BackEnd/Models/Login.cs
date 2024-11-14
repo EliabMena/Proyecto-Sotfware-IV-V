@@ -1,8 +1,12 @@
-﻿namespace GestionJubilacion_BackEnd
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GestionJubilacion_BackEnd.Models
 {
-    public class Login
+    public class usuario
     {
-        public string Usuario { get; set; }
-        public string Contraseña { get; set; }
+        [Key]
+        public string cedula { get; set; }
+        public string contraseña_hash { get; set; }
     }
 }
+

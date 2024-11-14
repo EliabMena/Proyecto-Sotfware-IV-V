@@ -2,11 +2,11 @@
 
 -- Tabla Usuarios
 CREATE TABLE IF NOT EXISTS Usuarios (
-    id_usuario SERIAL PRIMARY KEY,
+    id_usuario SERIAL UNIQUE,  -- Identificador único para relaciones
+    cedula VARCHAR(50) PRIMARY KEY,  -- Clave primaria basada en la cédula
     nombre VARCHAR(100) NOT NULL,
     direccion TEXT NOT NULL,
     contacto VARCHAR(50) NOT NULL,
-    cedula VARCHAR(50) NOT NULL,
     rol VARCHAR(20) CHECK (rol IN ('administrador', 'usuario')) NOT NULL,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     contraseña_hash VARCHAR(255) NOT NULL -- Campo para almacenar el hash de la contraseña
@@ -21,21 +21,21 @@ CREATE TABLE IF NOT EXISTS Planes_de_Jubilacion (
     descripcion TEXT
 );
 
--- Nueva tabla para la relación entre Usuarios y Planes de Jubilación
-CREATE TABLE IF NOT EXISTS Planes_Usuarios (
-    id_plan_usuario SERIAL PRIMARY KEY,
-    id_usuario INT REFERENCES Usuarios(id_usuario) ON DELETE CASCADE,
-    id_plan INT REFERENCES Planes_de_Jubilacion(id_plan) ON DELETE CASCADE,
-    id_beneficiario INT REFERENCES Beneficiarios(id_beneficiario) ON DELETE SET NULL  -- Beneficiario opcional
-);
-
--- Tabla Beneficiarios
+-- Tabla Beneficiarios (Definida antes de Planes_Usuarios)
 CREATE TABLE IF NOT EXISTS Beneficiarios (
     id_beneficiario SERIAL PRIMARY KEY,
     id_usuario INT REFERENCES Usuarios(id_usuario) ON DELETE CASCADE,
     nombre_beneficiario VARCHAR(100) NOT NULL,
     relacion VARCHAR(50),
     porcentaje_asignado NUMERIC(5, 2) CHECK (porcentaje_asignado <= 100 AND porcentaje_asignado >= 0)
+);
+
+-- Nueva tabla para la relación entre Usuarios y Planes de Jubilación
+CREATE TABLE IF NOT EXISTS Planes_Usuarios (
+    id_plan_usuario SERIAL PRIMARY KEY,
+    id_usuario INT REFERENCES Usuarios(id_usuario) ON DELETE CASCADE,
+    id_plan INT REFERENCES Planes_de_Jubilacion(id_plan) ON DELETE CASCADE,
+    id_beneficiario INT REFERENCES Beneficiarios(id_beneficiario) ON DELETE SET NULL  -- Beneficiario opcional
 );
 
 -- Tabla Pagos
@@ -57,6 +57,9 @@ CREATE TABLE IF NOT EXISTS Estados_de_Cuenta (
     intereses_acumulados NUMERIC(12, 2) DEFAULT 0,
     ultima_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- (Resto del código permanece igual)
+
 
 -- 2. Creación de Roles para la API
 
