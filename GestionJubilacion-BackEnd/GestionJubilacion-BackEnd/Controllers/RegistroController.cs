@@ -27,15 +27,13 @@ namespace GestionJubilacion_BackEnd.Controllers
                 return BadRequest("Todos los campos son requeridos.");
             }
 
-            // Asignar rol como usuario automáticamente
-            // ya que no pueden ser admins
-            nuevoUsuario.rol = "usuario";
-
             var usuarioExistente = await applicationDbContext.usuarios.FirstOrDefaultAsync(u => u.cedula == nuevoUsuario.cedula);
             if (usuarioExistente != null)
             {
                 return Conflict("El usuario ya existe.");
             }
+
+            nuevoUsuario.rol = "usuario";
 
             var encriptar = new Encriptar();
             nuevoUsuario.contraseña_hash = encriptar.GenerarHash(nuevoUsuario.contraseña_hash);

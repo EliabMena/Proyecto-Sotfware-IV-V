@@ -5,7 +5,6 @@ D:\Git\Proyecto-Sotfware-IV-V\GestionJubilacion-BackEnd\GestionJubilacion-BackEn
 D:\Git\Proyecto-Sotfware-IV-V\GestionJubilacion-BackEnd\GestionJubilacion-BackEnd\bin\Debug\net8.0\GestionJubilacion-BackEnd.runtimeconfig.json
 D:\Git\Proyecto-Sotfware-IV-V\GestionJubilacion-BackEnd\GestionJubilacion-BackEnd\bin\Debug\net8.0\GestionJubilacion-BackEnd.dll
 D:\Git\Proyecto-Sotfware-IV-V\GestionJubilacion-BackEnd\GestionJubilacion-BackEnd\bin\Debug\net8.0\GestionJubilacion-BackEnd.pdb
-D:\Git\Proyecto-Sotfware-IV-V\GestionJubilacion-BackEnd\GestionJubilacion-BackEnd\bin\Debug\net8.0\BCrypt.Net-Next.dll
 D:\Git\Proyecto-Sotfware-IV-V\GestionJubilacion-BackEnd\GestionJubilacion-BackEnd\bin\Debug\net8.0\Microsoft.OpenApi.dll
 D:\Git\Proyecto-Sotfware-IV-V\GestionJubilacion-BackEnd\GestionJubilacion-BackEnd\bin\Debug\net8.0\Npgsql.dll
 D:\Git\Proyecto-Sotfware-IV-V\GestionJubilacion-BackEnd\GestionJubilacion-BackEnd\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
