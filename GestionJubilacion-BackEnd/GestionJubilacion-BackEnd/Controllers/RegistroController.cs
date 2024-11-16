@@ -38,10 +38,17 @@ namespace GestionJubilacion_BackEnd.Controllers
             var encriptar = new Encriptar();
             nuevoUsuario.contraseña_hash = encriptar.GenerarHash(nuevoUsuario.contraseña_hash);
 
-            await applicationDbContext.usuarios.AddAsync(nuevoUsuario);
-            await applicationDbContext.SaveChangesAsync();
+            try
+            {
+                await applicationDbContext.usuarios.AddAsync(nuevoUsuario);
+                await applicationDbContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(Registrar), new { cedula = nuevoUsuario.cedula }, "Usuario registrado exitosamente.");
+                return CreatedAtAction(nameof(Registrar), new { cedula = nuevoUsuario.cedula }, "Usuario registrado exitosamente.");
+
+            }catch (Exception ex){
+                //por si falla algo en la conexion de la bse dedatos puse esto con el ex, ya luego quito el ex ydejo el mensaje
+                return StatusCode(500, $"Error interno del servidor");
+            }
         }
     }
 }

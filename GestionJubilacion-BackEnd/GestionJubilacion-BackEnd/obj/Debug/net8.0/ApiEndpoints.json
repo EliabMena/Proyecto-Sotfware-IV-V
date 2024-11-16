@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "GestionJubilacion_BackEnd.Controllers.BeneficiariosController",
+    "Method": "RegistrarBeneficiario",
+    "RelativePath": "api/Beneficiarios",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "beneficiario",
+        "Type": "GestionJubilacion_BackEnd.Models.beneficiario",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "GestionJubilacion_BackEnd.Controllers.LoginController",
     "Method": "Login",
     "RelativePath": "api/Login",
