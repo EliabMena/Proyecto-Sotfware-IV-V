@@ -7,8 +7,8 @@ namespace GestionJubilacion_BackEnd.Contexts
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        public DbSet<usuario> usuarios { get; set; }
-        public DbSet<beneficiario> beneficiarios { get; set; }
+        public DbSet<Usuario> usuarios { get; set; }
+        public DbSet<Beneficiario> beneficiarios { get; set; }
 
     }
 

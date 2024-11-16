@@ -17,19 +17,19 @@ namespace GestionJubilacion_BackEnd.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> RegistrarBeneficiario([FromBody] beneficiario beneficiario)
+        public async Task<ActionResult> RegistrarBeneficiario([FromBody] Beneficiario beneficiario)
         {
             if (beneficiario == null ||
-                string.IsNullOrEmpty(beneficiario.cedula) ||
+                beneficiario.id_usuario < 0 ||
                 string.IsNullOrEmpty(beneficiario.nombre_beneficiario) ||
-                beneficiario.porcentaje_asignado < 0 ||
+                beneficiario.porcentaje_asignado <=0 ||
                 beneficiario.porcentaje_asignado > 100)
             {
                 return BadRequest("Datos inválidos. Verifique la información enviada.");
             }
 
             // Validar que el usuario exista antes de registrar un beneficiario.
-            var usuario = await applicationDbContext.usuarios.FirstOrDefaultAsync(u => u.cedula == beneficiario.cedula);
+            var usuario = await applicationDbContext.usuarios.FirstOrDefaultAsync(u => u.id_usuario == beneficiario.id_usuario);
             if (usuario == null)
             {
                 return NotFound("El usuario asociado no existe.");

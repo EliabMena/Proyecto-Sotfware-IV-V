@@ -18,7 +18,7 @@ namespace GestionJubilacion_BackEnd.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Registrar([FromBody] usuario nuevoUsuario)
+        public async Task<ActionResult> Registrar([FromBody] Usuario nuevoUsuario)
         {
             if (nuevoUsuario == null || string.IsNullOrEmpty(nuevoUsuario.cedula) ||
                 string.IsNullOrEmpty(nuevoUsuario.nombre) || string.IsNullOrEmpty(nuevoUsuario.direccion) ||

@@ -9,7 +9,7 @@
     "Parameters": [
       {
         "Name": "beneficiario",
-        "Type": "GestionJubilacion_BackEnd.Models.beneficiario",
+        "Type": "GestionJubilacion_BackEnd.Models.Beneficiario",
         "IsRequired": true
       }
     ],
@@ -25,7 +25,7 @@
     "Parameters": [
       {
         "Name": "login",
-        "Type": "GestionJubilacion_BackEnd.Models.usuario",
+        "Type": "GestionJubilacion_BackEnd.Models.Usuario",
         "IsRequired": true
       }
     ],
@@ -41,7 +41,7 @@
     "Parameters": [
       {
         "Name": "nuevoUsuario",
-        "Type": "GestionJubilacion_BackEnd.Models.usuario",
+        "Type": "GestionJubilacion_BackEnd.Models.Usuario",
         "IsRequired": true
       }
     ],
