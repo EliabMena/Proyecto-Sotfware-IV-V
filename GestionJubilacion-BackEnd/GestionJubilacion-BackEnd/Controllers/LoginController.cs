@@ -18,7 +18,7 @@ namespace GestionJubilacion_BackEnd.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login([FromBody] Usuario login)
+        public async Task<ActionResult> Login([FromBody] usuario login)
         {
             if (login == null || string.IsNullOrEmpty(login.cedula) || string.IsNullOrEmpty(login.contraseña_hash))
             {
