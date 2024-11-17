@@ -50,14 +50,14 @@
   {
     "ContainingType": "GestionJubilacion_BackEnd.Controllers.VistaUsuarioController",
     "Method": "vistaUsuario",
-    "RelativePath": "api/VistaUsuario/{cedula}",
+    "RelativePath": "api/VistaUsuario/{id_usuario}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "cedula",
-        "Type": "System.String",
+        "Name": "id_usuario",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

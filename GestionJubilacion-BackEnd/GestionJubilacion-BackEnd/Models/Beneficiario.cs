@@ -17,5 +17,7 @@ namespace GestionJubilacion_BackEnd.Models
 
         public decimal porcentaje_asignado { get; set; }
 
+        public string cedula_beneficiario { get; set; }
+
     }
 }

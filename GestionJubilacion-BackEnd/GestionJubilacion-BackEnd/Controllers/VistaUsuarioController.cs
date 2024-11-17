@@ -19,23 +19,33 @@ namespace GestionJubilacion_BackEnd.Controllers
             this.applicationDbContext = applicationDbContext;
         }
 
-        [HttpGet("{cedula}")]
-        public async Task<ActionResult<VistaUsuario>> vistaUsuario(string cedula)
+        [HttpGet("{id_usuario}")]
+        public async Task<ActionResult<VistaUsuario>> vistaUsuario(int id_usuario)
         {
-            if (string.IsNullOrEmpty(cedula))
+            if (id_usuario < 0)
             {
-                return BadRequest("La cédula es requerida.");
+                return BadRequest("El id de usuario es requerido y debe ser un valor positivo.");
             }
 
             var usuario = await applicationDbContext.VistaUsuario
-                .FromSqlRaw("SELECT * FROM vista_usuario WHERE cedula = {0}", cedula)
+                .FromSqlRaw("SELECT * FROM vista_usuario WHERE id_usuario = {0}", id_usuario)
                 .FirstOrDefaultAsync();
 
             if (usuario == null)
             {
-                return NotFound($"No se encontró un usuario con la cédula {cedula}.");
+                return NotFound($"No se encontró un usuario con el id {id_usuario}.");
             }
-            return Ok(usuario);
+
+            var beneficiarios = await applicationDbContext.VistaBeneficiarios
+            .FromSqlRaw("SELECT * FROM vista_beneficiarios WHERE id_usuario  = {0}", usuario.id_usuario)
+            .ToListAsync();
+
+
+            return Ok(new
+            {
+                Usuario = usuario,
+                Beneficiarios = beneficiarios
+            });
         }
     }
 }

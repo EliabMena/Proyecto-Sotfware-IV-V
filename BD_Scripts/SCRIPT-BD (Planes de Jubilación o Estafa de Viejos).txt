@@ -9,7 +9,9 @@ CREATE TABLE IF NOT EXISTS Usuarios (
     contacto VARCHAR(50) NOT NULL,
     rol VARCHAR(20) CHECK (rol IN ('administrador', 'usuario')) NOT NULL,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    contraseña_hash VARCHAR(255) NOT NULL -- Campo para almacenar el hash de la contraseña
+    contraseña_hash VARCHAR(255) NOT NULL, -- Campo para almacenar el hash de la contraseña
+    id_plan INT,
+    FOREIGN KEY (id_plan) REFERENCES Planes_de_Jubilacion(id_plan) ON DELETE SET NULL  -- Si se elimina el plan, el usuario quedará sin plan
 );
 
 -- Tabla Planes de Jubilación (solo lista los planes disponibles)
@@ -18,24 +20,19 @@ CREATE TABLE IF NOT EXISTS Planes_de_Jubilacion (
     tipo_plan VARCHAR(50) NOT NULL,
     monto_minimo_aportacion NUMERIC(10, 2) NOT NULL,
     tasa_interes NUMERIC(5, 2) NOT NULL,
-    descripcion TEXT
+    descripcion TEXT,
+    cuotas_necesarias INT NOT NULL
 );
 
 -- Tabla Beneficiarios (Definida antes de Planes_Usuarios)
 CREATE TABLE IF NOT EXISTS Beneficiarios (
     id_beneficiario SERIAL PRIMARY KEY,
+    cedula_beneficiario VARCHAR(50) NOT NULL,
     id_usuario INT REFERENCES Usuarios(id_usuario) ON DELETE CASCADE,
     nombre_beneficiario VARCHAR(100) NOT NULL,
     relacion VARCHAR(50),
-    porcentaje_asignado NUMERIC(5, 2) CHECK (porcentaje_asignado <= 100 AND porcentaje_asignado >= 0)
-);
-
--- Nueva tabla para la relación entre Usuarios y Planes de Jubilación
-CREATE TABLE IF NOT EXISTS Planes_Usuarios (
-    id_plan_usuario SERIAL PRIMARY KEY,
-    id_usuario INT REFERENCES Usuarios(id_usuario) ON DELETE CASCADE,
-    id_plan INT REFERENCES Planes_de_Jubilacion(id_plan) ON DELETE CASCADE,
-    id_beneficiario INT REFERENCES Beneficiarios(id_beneficiario) ON DELETE SET NULL  -- Beneficiario opcional
+    porcentaje_asignado NUMERIC(5, 2) CHECK (porcentaje_asignado <= 100 AND porcentaje_asignado >= 0),
+    CONSTRAINT unique_cedula_beneficiario UNIQUE (cedula_beneficiario) -- Restricción de unicidad
 );
 
 -- Tabla Pagos
@@ -55,11 +52,9 @@ CREATE TABLE IF NOT EXISTS Estados_de_Cuenta (
     saldo_actual NUMERIC(12, 2) DEFAULT 0,
     aportaciones_realizadas NUMERIC(12, 2) DEFAULT 0,
     intereses_acumulados NUMERIC(12, 2) DEFAULT 0,
-    ultima_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ultima_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    cuotas_pagadas integer NOT NULL
 );
-
--- (Resto del código permanece igual)
-
 
 -- 2. Creación de Roles para la API
 
@@ -91,26 +86,37 @@ BEGIN
 END $$;
 
 -- 4. Creación de Vistas para Controlar el Acceso
-
--- Vista para el Usuario, permite que vea solo sus datos y planes asignados
+-- Vista de Usuario que muestra todos los usuarios, incluso si no tienen plan
 CREATE OR REPLACE VIEW vista_usuario AS
-SELECT 
+SELECT DISTINCT
+    u.cedula,
     u.id_usuario, 
     u.nombre, 
-    pj.tipo_plan, 
-    pj.monto_minimo_aportacion, 
-    pj.tasa_interes, 
-    e.saldo_actual, 
-    e.aportaciones_realizadas, 
-    e.intereses_acumulados, 
+    COALESCE(pj.tipo_plan, 'Sin Plan') AS tipo_plan,  -- Si no tiene plan, muestra 'Sin Plan'
+    COALESCE(pj.monto_minimo_aportacion, 0) AS monto_minimo_aportacion, 
+    COALESCE(pj.tasa_interes, 0) AS tasa_interes,
+    COALESCE(pj.cuotas_necesarias, 0) AS cuotas_necesarias,
+    COALESCE(e.saldo_actual, 0) AS saldo_actual,
+    COALESCE(e.aportaciones_realizadas, 0) AS aportaciones_realizadas,
+    COALESCE(e.intereses_acumulados, 0) AS intereses_acumulados,
+    COALESCE(e.cuotas_pagadas, 0) AS cuotas_pagadas
+FROM Usuarios u
+LEFT JOIN Planes_de_Jubilacion pj ON u.id_plan = pj.id_plan  -- Relacion directa con la tabla Planes_de_Jubilacion
+LEFT JOIN Estados_de_Cuenta e ON u.id_usuario = e.id_usuario;
+
+
+
+
+-- Vista de Beneficiarios
+CREATE OR REPLACE VIEW vista_beneficiarios AS
+SELECT 
+    u.id_usuario,
+    b.cedula_beneficiario, 
     b.nombre_beneficiario, 
     b.relacion, 
     b.porcentaje_asignado
 FROM Usuarios u
-JOIN Planes_Usuarios pu ON u.id_usuario = pu.id_usuario
-JOIN Planes_de_Jubilacion pj ON pu.id_plan = pj.id_plan
-LEFT JOIN Beneficiarios b ON pu.id_beneficiario = b.id_beneficiario
-LEFT JOIN Estados_de_Cuenta e ON u.id_usuario = e.id_usuario;
+LEFT JOIN Beneficiarios b ON u.id_usuario = b.id_usuario;
 
 -- Vista de Pagos para el usuario
 CREATE OR REPLACE VIEW vista_pagos_usuario AS
@@ -123,41 +129,6 @@ SELECT
     p.estado
 FROM Pagos p
 JOIN Usuarios u ON p.id_usuario = u.id_usuario;
-
--- Vista completa para el administrador, con acceso a todos los datos
-CREATE OR REPLACE VIEW vista_administrador AS
-SELECT 
-    u.id_usuario AS usuario_id, 
-    u.nombre AS usuario_nombre, 
-    u.direccion, 
-    u.contacto, 
-    u.rol, 
-    u.fecha_registro,
-    pj.id_plan AS plan_id, 
-    pj.tipo_plan, 
-    pj.monto_minimo_aportacion, 
-    pj.tasa_interes, 
-    pj.descripcion,
-    e.id_estado AS estado_id, 
-    e.saldo_actual, 
-    e.aportaciones_realizadas, 
-    e.intereses_acumulados, 
-    e.ultima_actualizacion,
-    b.id_beneficiario AS beneficiario_id, 
-    b.nombre_beneficiario, 
-    b.relacion, 
-    b.porcentaje_asignado,
-    pa.id_pago AS pago_id, 
-    pa.fecha_pago, 
-    pa.monto, 
-    pa.metodo_pago, 
-    pa.estado
-FROM Usuarios u
-LEFT JOIN Planes_Usuarios pu ON u.id_usuario = pu.id_usuario
-LEFT JOIN Planes_de_Jubilacion pj ON pu.id_plan = pj.id_plan
-LEFT JOIN Estados_de_Cuenta e ON u.id_usuario = e.id_usuario
-LEFT JOIN Beneficiarios b ON pu.id_beneficiario = b.id_beneficiario
-LEFT JOIN Pagos pa ON u.id_usuario = pa.id_usuario;
 
 -- 5. Asignación de Permisos sobre las Vistas
 GRANT SELECT ON vista_usuario, vista_pagos_usuario TO usuario_api;

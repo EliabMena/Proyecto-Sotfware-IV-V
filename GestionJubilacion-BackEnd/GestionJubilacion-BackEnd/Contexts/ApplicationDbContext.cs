@@ -10,6 +10,9 @@ namespace GestionJubilacion_BackEnd.Contexts
         public DbSet<usuario> usuarios { get; set; }
         public DbSet<Beneficiario> beneficiarios { get; set; }
         public DbSet<VistaUsuario> VistaUsuario { get; set; }
+        public DbSet<VistaBeneficiario> VistaBeneficiarios { get; set; }
+        public DbSet<PlanesJubilacion> planes_de_jubilacion { get; set; }
+
     }
 
 }

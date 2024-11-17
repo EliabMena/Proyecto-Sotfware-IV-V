@@ -22,7 +22,7 @@ namespace GestionJubilacion_BackEnd.Controllers
         {
             if (nuevoUsuario == null || string.IsNullOrEmpty(nuevoUsuario.cedula) ||
                 string.IsNullOrEmpty(nuevoUsuario.nombre) || string.IsNullOrEmpty(nuevoUsuario.direccion) ||
-                string.IsNullOrEmpty(nuevoUsuario.contacto) || string.IsNullOrEmpty(nuevoUsuario.contraseña_hash))
+                string.IsNullOrEmpty(nuevoUsuario.contacto) || string.IsNullOrEmpty(nuevoUsuario.contraseña_hash) || nuevoUsuario.id_plan <= 0)
             {
                 return BadRequest("Todos los campos son requeridos.");
             }
@@ -31,6 +31,13 @@ namespace GestionJubilacion_BackEnd.Controllers
             if (usuarioExistente != null)
             {
                 return Conflict("El usuario ya existe.");
+            }
+
+            var planExistente = await applicationDbContext.planes_de_jubilacion
+            .FirstOrDefaultAsync(p => p.id_plan == nuevoUsuario.id_plan);
+            if (planExistente == null)
+            {
+                return NotFound("El plan especificado no existe.");
             }
 
             nuevoUsuario.rol = "usuario";
@@ -43,12 +50,24 @@ namespace GestionJubilacion_BackEnd.Controllers
                 await applicationDbContext.usuarios.AddAsync(nuevoUsuario);
                 await applicationDbContext.SaveChangesAsync();
 
-                return CreatedAtAction(nameof(Registrar), new { cedula = nuevoUsuario.cedula }, "Usuario registrado exitosamente.");
-
-            }catch (Exception ex){
-                //por si falla algo en la conexion de la bse dedatos puse esto con el ex, ya luego quito el ex ydejo el mensaje
-                return StatusCode(500, $"Error interno del servidor");
+                return CreatedAtAction(nameof(Registrar), new { id = nuevoUsuario.id_usuario }, new
+                {
+                    message = "Usuario registrado exitosamente.",
+                    nuevoUsuario.id_usuario
+                });
+            }
+            catch (Exception ex)
+            {
+                // Log de error completo con detalles de la excepción interna
+                var errorMessage = $"Error al guardar los cambios: {ex.Message}";
+                if (ex.InnerException != null)
+                {
+                    errorMessage += $" - Detalle: {ex.InnerException.Message}";
+                }
+                return StatusCode(500, errorMessage); // Devolver el error detallado
             }
         }
+
     }
 }
+

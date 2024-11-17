@@ -41,7 +41,11 @@ namespace GestionJubilacion_BackEnd.Controllers
                 return Unauthorized("Contraseña incorrecta.");
             }
 
-            return Ok("Login exitoso.");
+            return Ok(new
+            {
+                message = "Login exitoso.",
+                usuario.id_usuario
+            });
         }
 
 

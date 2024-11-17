@@ -23,7 +23,7 @@ namespace GestionJubilacion_BackEnd.Controllers
                 beneficiario.id_usuario < 0 ||
                 string.IsNullOrEmpty(beneficiario.nombre_beneficiario) ||
                 beneficiario.porcentaje_asignado <=0 ||
-                beneficiario.porcentaje_asignado > 100)
+                beneficiario.porcentaje_asignado > 100 || beneficiario.cedula_beneficiario == null)
             {
                 return BadRequest("Datos inválidos. Verifique la información enviada.");
             }
