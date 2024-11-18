@@ -27,25 +27,38 @@ namespace GestionJubilacion_BackEnd.Controllers
                 return BadRequest("El id de usuario es requerido y debe ser un valor positivo.");
             }
 
-            var usuario = await applicationDbContext.VistaUsuario
+            try
+            {
+                var usuario = await applicationDbContext.VistaUsuario
                 .FromSqlRaw("SELECT * FROM vista_usuario WHERE id_usuario = {0}", id_usuario)
                 .FirstOrDefaultAsync();
 
-            if (usuario == null)
-            {
-                return NotFound($"No se encontró un usuario con el id {id_usuario}.");
+                if (usuario == null)
+                {
+                    return NotFound($"No se encontró un usuario con el id {id_usuario}.");
+                }
+
+                var beneficiarios = await applicationDbContext.VistaBeneficiarios
+                .FromSqlRaw("SELECT * FROM vista_beneficiarios WHERE id_usuario  = {0}", usuario.id_usuario)
+                .ToListAsync();
+
+
+                return Ok(new
+                {
+                    Usuario = usuario,
+                    Beneficiarios = beneficiarios
+                });
             }
 
-            var beneficiarios = await applicationDbContext.VistaBeneficiarios
-            .FromSqlRaw("SELECT * FROM vista_beneficiarios WHERE id_usuario  = {0}", usuario.id_usuario)
-            .ToListAsync();
-
-
-            return Ok(new
+            catch (Exception e)
             {
-                Usuario = usuario,
-                Beneficiarios = beneficiarios
-            });
+                var errorMessage = $"Error al actualizar el usuario: {e.Message}";
+                if (e.InnerException != null)
+                {
+                    errorMessage += $" - Detalle: {e.InnerException.Message}";
+                }
+                return StatusCode(500, errorMessage);
+            }
         }
     }
 }

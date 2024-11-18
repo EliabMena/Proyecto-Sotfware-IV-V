@@ -22,7 +22,7 @@ namespace GestionJubilacion_BackEnd.Controllers
         {
             if (nuevoUsuario == null || string.IsNullOrEmpty(nuevoUsuario.cedula) ||
                 string.IsNullOrEmpty(nuevoUsuario.nombre) || string.IsNullOrEmpty(nuevoUsuario.direccion) ||
-                string.IsNullOrEmpty(nuevoUsuario.contacto) || string.IsNullOrEmpty(nuevoUsuario.contraseña_hash) || nuevoUsuario.id_plan <= 0)
+                string.IsNullOrEmpty(nuevoUsuario.contacto) || string.IsNullOrEmpty(nuevoUsuario.contraseña_hash))
             {
                 return BadRequest("Todos los campos son requeridos.");
             }
@@ -44,6 +44,10 @@ namespace GestionJubilacion_BackEnd.Controllers
 
             var encriptar = new Encriptar();
             nuevoUsuario.contraseña_hash = encriptar.GenerarHash(nuevoUsuario.contraseña_hash);
+            //Problemas con la fehca
+            nuevoUsuario.fecha_registro = DateTime.Now.ToLocalTime();
+            //nuevoUsuario.fecha_registro = DateTime.Now;
+
 
             try
             {
@@ -67,6 +71,64 @@ namespace GestionJubilacion_BackEnd.Controllers
                 return StatusCode(500, errorMessage); // Devolver el error detallado
             }
         }
+
+        [HttpPatch("actualizar")]
+        public async Task<ActionResult> ActualizarUsuario(int id_usuario, [FromBody] UsuarioActualizar usuario)
+        {
+            if (id_usuario <= 0)
+            {
+                return BadRequest("El id_usuario debe ser un número válido y mayor a 0.");
+            }
+
+            var usuarioActual = await applicationDbContext.usuarios.FirstOrDefaultAsync(u => u.id_usuario == id_usuario);
+
+            if (usuarioActual == null)
+            {
+                return NotFound("No se encontraron datos del usuario");
+            }
+
+            try
+            {
+                // Solo actualiza los campos que se reciban en el cuerpo del PATCH
+                if (!string.IsNullOrEmpty(usuario.nombre))
+                {
+                    usuarioActual.nombre = usuario.nombre;
+                }
+                if (!string.IsNullOrEmpty(usuario.direccion))
+                {
+                    usuarioActual.direccion = usuario.direccion;
+                }
+                if (!string.IsNullOrEmpty(usuario.contacto))
+                {
+                    usuarioActual.contacto = usuario.contacto;
+                }
+                if (!string.IsNullOrEmpty(usuario.contraseña_hash))
+                {
+                    var encriptar = new Encriptar();
+                    usuarioActual.contraseña_hash = encriptar.GenerarHash(usuario.contraseña_hash);
+                }
+
+                //siempre es la bendita fecha
+                //usuarioActual.fecha_registro = usuarioActual.fecha_registro;
+                usuarioActual.fecha_registro = DateTime.Now;
+
+
+                applicationDbContext.usuarios.Update(usuarioActual);
+                await applicationDbContext.SaveChangesAsync();
+
+                return Ok("Usuario actualizado correctamente");
+            }
+            catch (Exception e)
+            {
+                var errorMessage = $"Error al actualizar el usuario: {e.Message}";
+                if (e.InnerException != null)
+                {
+                    errorMessage += $" - Detalle: {e.InnerException.Message}";
+                }
+                return StatusCode(500, errorMessage);
+            }
+        }
+
 
     }
 }

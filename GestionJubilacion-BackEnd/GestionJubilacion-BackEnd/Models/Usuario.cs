@@ -17,7 +17,11 @@ namespace GestionJubilacion_BackEnd.Models
         public string direccion { get; set; }
         public string rol { get; set; } = "usuario";
         public string contacto { get; set; }
+
+        //[Column(TypeName = "timestamp")]
+        [Column(TypeName = "timestamp without time zone")]
         public DateTime fecha_registro { get; set; } = DateTime.Now;
+
         public int id_plan { get; set; }
     }
 }
