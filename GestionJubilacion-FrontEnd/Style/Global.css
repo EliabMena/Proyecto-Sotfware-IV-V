@@ -1,0 +1,209 @@
+/*Paleta de colores*/
+:root{
+    --Primario: #013D5A;
+    --Secundario: #70BAF9;
+    --blancoNoTanBlanco: #f8f9fa;
+    --GrisClarito:#D3D3D3;
+    --GrisAgradable:#868e96;
+    --GrisColorPetroleo: rgb(53, 53, 53);
+
+    --Opacidad1: rgba(0, 0, 0, 0.65);
+    --Opacidad2: rgba(0, 0, 0, 0);
+}
+
+/*Enserio no toquen nada de aqui abajo solo los colores si necesitan agregar o cambiar*/
+/*Altura de los elemntos por Z-index*/
+z-index{
+    --Barra-de-Navegacion:999; /*NI SE LES PASE POR LA CABEZA CAMBIAR ESTO ATT: ELIAB MENA*/
+
+    --Altura-Imagenes:0;
+    --Altura-Opacidad-Imagenes:1;
+    --Altura-Texto:2;
+}
+
+/*ESTILOS DEL CUERPO*/
+body {
+    background: var(--blancoNoTanBlanco);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: var(--Primario);
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+}
+
+/*BARRA DE NAVEGACION GLOBAL*/
+header {
+    background-color: #ffffff;
+    position: fixed;
+    width: 100%;
+    z-index: 999; /*NI SE LES PASE POR LA CABEZA CAMBIAR ESTO ATT: ELIAB MENA*/
+}
+
+header .header-contenedor {
+    width: 100%;
+    max-height: 10vh;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1vh;
+}
+
+header .logo {
+    max-width: 30%;
+    display: flex;
+    justify-content: center;
+}
+
+header .logo img {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}
+
+header ul {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+}
+
+header ul li {
+    position: relative;
+    list-style: none;
+}
+
+header ul li a {
+    position: relative;
+    margin: 0 15px;
+    text-decoration: none;
+    color: var(--Primario);
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+header .header-menu {
+    width: 100%;
+    margin-right: 10px;
+}
+
+header .active{
+    color: var(--Primario);
+    font-weight: bold;
+}
+
+header .active::after{
+    content: "";
+    position: absolute;
+    background-color: var(--Primario);
+    height: 3px;
+    width: 100%;
+    left: 0;
+    bottom: -10px;
+    transition: 0.3s;
+}
+
+header a::after{
+    content: "";
+    position: absolute;
+    background-color: var(--Primario);
+    height: 3px;
+    width: 0;
+    left: 0;
+    bottom: -10px;
+    transition: 0.3s;
+}
+header a:hover:after{
+    width: 100%;
+}
+
+header a:hover{
+    color: var(--Primario);
+    font-weight: bold;
+}
+
+/*PIE DE PAGINA*/
+.container{
+    max-width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding-bottom: 2vh;
+}
+.row{
+    margin: 2vh;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+ul{
+    list-style: none;
+    padding: 0;
+}
+.footer{
+    background-color: var(--GrisColorPetroleo);
+    margin-top: 2vh;
+}
+.footer-col{
+    width: 20%;
+    padding: 0 15px;
+}
+.footer-col h4{
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+}
+.footer-col h4::before{
+    content: '';
+    position: absolute;
+    left:0;
+    bottom: -10px;
+    background-color: var(--blancoNoTanBlanco);
+    height: 2px;
+    box-sizing: border-box;
+    width: 60%;
+}
+.footer-col ul li:not(:last-child){
+    margin-bottom: 10px;
+}
+.footer-col ul li a{
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #d6d6d6;
+    text-decoration: none;
+    font-weight: 300;
+    color: #bdc1c3;
+    display: block;
+    transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+    color: #ffffff;
+    padding-left: 8px;
+    font-size: 20px;
+}
+.footer-col .social-links a{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255,255,255,0.2);
+    margin:0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover{
+    color: #24262b;
+    background-color: #ffffff;
+}
