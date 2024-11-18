@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="/GestionJubilacion-FrontEnd/Style/regcss.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-container">
+        <form class="iniciar-sesion">
+          <h2>Iniciar Sesión</h2>
+          <span>Correo y Contraseña</span>
+          <div class="input-container">
+            <ion-icon name="mail-outline"></ion-icon>
+            <input type="text" placeholder="Correo" name="correo" />
+          </div>
+          <div class="input-container">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <input type="password" placeholder="Contraseña" name="contraseña" />
+          </div>
+          <a href="#">Olvidé mi contraseña</a>
+          <button class="boton">Iniciar Sesión</button>
+        </form>
+      </div>
+
+      <div class="form-container">
+        <form class="registro">
+          <h2>Registro</h2>
+          <span>Ingrese sus Datos</span>
+          <div class="input-container">
+            <ion-icon name="person-outline"></ion-icon>
+            <input type="text" placeholder="Nombre" name="Nombre" />
+          </div>
+          <div class="input-container">
+            <ion-icon name="mail-outline"></ion-icon>
+            <input type="text" placeholder="Correo" name="correo" />
+          </div>
+          <div class="input-container">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <input type="password" placeholder="Contraseña" name="contraseña" />
+          </div>
+          <button class="boton">Registrarse</button>
+        </form>
+      </div>
+
+      <div class="container-bienvenida">
+        <div class="bienvenida-registro bienvenida">
+          <h3>Bienvendio a Vida Aliada</h3>
+            <p>Ingrese sus datos para registrarse</p>
+            <button class="boton" id="btn-registro">Registrarse</button>
+        </div>
+        <div class="bienvenida-sesion bienvenida">
+            <h3>Hola, Bienvenido de Nuevo</h3>
+            <p>Ingrese sus datos para acceder</p>
+            <button class="boton" id="btn-sesion">Iniciar Sesión</button>
+        </div>
+      </div>
+
+    </div>
+
+      <script src="/GestionJubilacion-FrontEnd/JScripts/scriptreg.js"></script>
+      <script
+        type="module"
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+      ></script>
+      <script
+        nomodule
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+      ></script>
+    </div>
+  </body>
+</html>
