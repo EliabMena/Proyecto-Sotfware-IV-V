@@ -58,6 +58,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "GestionJubilacion_BackEnd.Controllers.PlanesController",
+    "Method": "ObtenerPlanes",
+    "RelativePath": "api/Planes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionJubilacion_BackEnd.Controllers.PlanesController",
+    "Method": "ObtenerPlanActivo",
+    "RelativePath": "api/Planes/plan-activo/{id_usuario}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id_usuario",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "GestionJubilacion_BackEnd.Controllers.RegistroController",
     "Method": "Registrar",
     "RelativePath": "api/Registro",

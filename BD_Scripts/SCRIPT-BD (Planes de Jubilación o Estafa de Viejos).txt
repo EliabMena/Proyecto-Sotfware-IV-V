@@ -1,4 +1,12 @@
--- 1. Creación de Tablas Principales
+-- Tabla Planes de Jubilación (debe crearse antes de Usuarios)
+CREATE TABLE IF NOT EXISTS Planes_de_Jubilacion (
+    id_plan SERIAL PRIMARY KEY,
+    tipo_plan VARCHAR(50) NOT NULL,
+    monto_minimo_aportacion NUMERIC(10, 2) NOT NULL,
+    tasa_interes NUMERIC(5, 2) NOT NULL,
+    descripcion TEXT,
+    cuotas_necesarias INT NOT NULL
+);
 
 -- Tabla Usuarios
 CREATE TABLE IF NOT EXISTS Usuarios (
@@ -12,16 +20,6 @@ CREATE TABLE IF NOT EXISTS Usuarios (
     contraseña_hash VARCHAR(255) NOT NULL, -- Campo para almacenar el hash de la contraseña
     id_plan INT,
     FOREIGN KEY (id_plan) REFERENCES Planes_de_Jubilacion(id_plan) ON DELETE SET NULL  -- Si se elimina el plan, el usuario quedará sin plan
-);
-
--- Tabla Planes de Jubilación (solo lista los planes disponibles)
-CREATE TABLE IF NOT EXISTS Planes_de_Jubilacion (
-    id_plan SERIAL PRIMARY KEY,
-    tipo_plan VARCHAR(50) NOT NULL,
-    monto_minimo_aportacion NUMERIC(10, 2) NOT NULL,
-    tasa_interes NUMERIC(5, 2) NOT NULL,
-    descripcion TEXT,
-    cuotas_necesarias INT NOT NULL
 );
 
 -- Tabla Beneficiarios (Definida antes de Planes_Usuarios)
