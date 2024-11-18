@@ -1,103 +1,111 @@
+using GestionJubilacion_BackEnd.Contexts;
+using GestionJubilacion_BackEnd.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using GestionJubilacion_BackEnd;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GestionJubilacion_BackEnd.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class BeneficiariosController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly ApplicationDbContext applicationDbContext;
 
-        public BeneficiariosController(AppDbContext context)
+        public BeneficiariosController(ApplicationDbContext applicationDbContext)
         {
-            _context = context;
+            this.applicationDbContext = applicationDbContext;
         }
 
-        // GET: api/Beneficiarios
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Beneficiario>>> GetBeneficiarios()
+        [HttpPost]
+        public async Task<ActionResult> RegistrarBeneficiario([FromBody] Beneficiario beneficiario)
         {
-            return await _context.Beneficiarios.Include(b => b.Usuario).ToListAsync();
-        }
-
-        // GET: api/Beneficiarios/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Beneficiario>> GetBeneficiario(int id)
-        {
-            var beneficiario = await _context.Beneficiarios.Include(b => b.Usuario).FirstOrDefaultAsync(b => b.id_beneficiario == id);
-
-            if (beneficiario == null)
+            if (beneficiario == null ||
+                beneficiario.id_usuario < 0 ||
+                string.IsNullOrEmpty(beneficiario.nombre_beneficiario) ||
+                beneficiario.porcentaje_asignado <=0 ||
+                beneficiario.porcentaje_asignado > 100 || beneficiario.cedula_beneficiario == null)
             {
-                return NotFound();
+                return BadRequest("Datos inválidos. Verifique la información enviada.");
             }
 
-            return beneficiario;
-        }
-
-        // PUT: api/Beneficiarios/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBeneficiario(int id, Beneficiario beneficiario)
-        {
-            if (id != beneficiario.id_beneficiario)
+            var usuario = await applicationDbContext.usuarios.FirstOrDefaultAsync(u => u.id_usuario == beneficiario.id_usuario);
+            if (usuario == null)
             {
-                return BadRequest();
-            }
-
-            _context.Entry(beneficiario).State = EntityState.Modified;
+                return NotFound("El usuario asociado no existe.");
+            } 
 
             try
             {
-                await _context.SaveChangesAsync();
+                await applicationDbContext.beneficiarios.AddAsync(beneficiario);
+                await applicationDbContext.SaveChangesAsync();
+
+                return Ok("Beneficiario registrado con éxito.");
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex){
+                //por si falla algo en la conexion de la bse dedatos puse esto con el ex, ya luego quito el ex ydejo el mensaje
+                return StatusCode(500, $"Error interno del servidor: {ex.InnerException?.Message ?? ex.Message}");
+            }
+        }
+
+        [HttpPatch]
+        public async Task<ActionResult> ActualizarBeneficiario(int id_usuario, string nombre_beneficiario, [FromBody] BeneficiarioActualizar beneficiario)
+        {
+            if (id_usuario <= 0)
             {
-                if (!BeneficiarioExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest("El id_usuario debe ser un número válido y mayor a 0.");
             }
 
-            return NoContent();
-        }
-
-        // POST: api/Beneficiarios
-        [HttpPost]
-        public async Task<ActionResult<Beneficiario>> PostBeneficiario(Beneficiario beneficiario)
-        {
-            _context.Beneficiarios.Add(beneficiario);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetBeneficiario", new { id = beneficiario.id_beneficiario }, beneficiario);
-        }
-
-        // DELETE: api/Beneficiarios/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBeneficiario(int id)
-        {
-            var beneficiario = await _context.Beneficiarios.FindAsync(id);
-            if (beneficiario == null)
+            if (string.IsNullOrEmpty(nombre_beneficiario))
             {
-                return NotFound();
+                return BadRequest("El nombre del beneficiario es obligatorio.");
             }
 
-            _context.Beneficiarios.Remove(beneficiario);
-            await _context.SaveChangesAsync();
+            // Buscar al beneficiario específico
+            var beneficiarioActual = await applicationDbContext.beneficiarios
+                .FirstOrDefaultAsync(b => b.id_usuario == id_usuario && b.nombre_beneficiario == nombre_beneficiario);
 
-            return NoContent();
+            if (beneficiarioActual == null)
+            {
+                return NotFound("No se encontró el beneficiario asociado al usuario.");
+            }
+
+            try
+            {
+                // Actualizar solo los campos proporcionados
+                if (!string.IsNullOrEmpty(beneficiario.nombre_beneficiario))
+                {
+                    beneficiarioActual.nombre_beneficiario = beneficiario.nombre_beneficiario;
+                }
+                if (!string.IsNullOrEmpty(beneficiario.relacion))
+                {
+                    beneficiarioActual.relacion = beneficiario.relacion;
+                }
+                if (beneficiario.porcentaje_asignado > 0 && beneficiario.porcentaje_asignado <= 100)
+                {
+                    beneficiarioActual.porcentaje_asignado = (decimal)beneficiario.porcentaje_asignado;
+                }
+                if (!string.IsNullOrEmpty(beneficiario.cedula_beneficiario))
+                {
+                    beneficiarioActual.cedula_beneficiario = beneficiario.cedula_beneficiario;
+                }
+
+                // Guardar cambios en la base de datos
+                applicationDbContext.beneficiarios.Update(beneficiarioActual);
+                await applicationDbContext.SaveChangesAsync();
+
+                return Ok("Beneficiario actualizado correctamente.");
+            }
+            catch (Exception e)
+            {
+                var errorMessage = $"Error al actualizar el beneficiario: {e.Message}";
+                if (e.InnerException != null)
+                {
+                    errorMessage += $" - Detalle: {e.InnerException.Message}";
+                }
+                return StatusCode(500, errorMessage);
+            }
         }
 
-        private bool BeneficiarioExists(int id)
-        {
-            return _context.Beneficiarios.Any(e => e.id_beneficiario == id);
-        }
     }
 }
+

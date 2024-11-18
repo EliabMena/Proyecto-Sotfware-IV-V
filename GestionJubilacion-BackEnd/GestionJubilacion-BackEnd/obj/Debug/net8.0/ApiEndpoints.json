@@ -1,0 +1,123 @@
+[
+  {
+    "ContainingType": "GestionJubilacion_BackEnd.Controllers.BeneficiariosController",
+    "Method": "RegistrarBeneficiario",
+    "RelativePath": "api/Beneficiarios",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "beneficiario",
+        "Type": "GestionJubilacion_BackEnd.Models.Beneficiario",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionJubilacion_BackEnd.Controllers.BeneficiariosController",
+    "Method": "ActualizarBeneficiario",
+    "RelativePath": "api/Beneficiarios",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id_usuario",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "nombre_beneficiario",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "beneficiario",
+        "Type": "GestionJubilacion_BackEnd.Models.BeneficiarioActualizar",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionJubilacion_BackEnd.Controllers.LoginController",
+    "Method": "Login",
+    "RelativePath": "api/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "login",
+        "Type": "GestionJubilacion_BackEnd.Models.usuario",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionJubilacion_BackEnd.Controllers.RegistroController",
+    "Method": "Registrar",
+    "RelativePath": "api/Registro",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nuevoUsuario",
+        "Type": "GestionJubilacion_BackEnd.Models.usuario",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionJubilacion_BackEnd.Controllers.RegistroController",
+    "Method": "ActualizarUsuario",
+    "RelativePath": "api/Registro/actualizar",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id_usuario",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "usuario",
+        "Type": "GestionJubilacion_BackEnd.Models.UsuarioActualizar",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionJubilacion_BackEnd.Controllers.VistaUsuarioController",
+    "Method": "vistaUsuario",
+    "RelativePath": "api/VistaUsuario/{id_usuario}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id_usuario",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "GestionJubilacion_BackEnd.Models.VistaUsuario",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

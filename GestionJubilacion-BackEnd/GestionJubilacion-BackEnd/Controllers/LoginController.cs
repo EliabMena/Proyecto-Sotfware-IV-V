@@ -1,46 +1,53 @@
+﻿using GestionJubilacion_BackEnd.Contexts;
+using GestionJubilacion_BackEnd.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading.Tasks;
-using GestionJubilacion_BackEnd;
 
 namespace GestionJubilacion_BackEnd.Controllers
 {
-    [Route("api/[controller]")]
+
     [ApiController]
+    [Route("api/[controller]")]
     public class LoginController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly ApplicationDbContext applicationDbContext;
 
-        public LoginController(AppDbContext context)
+        public LoginController(ApplicationDbContext applicationDbContext)
         {
-            _context = context;
+            this.applicationDbContext = applicationDbContext;
         }
 
-        // POST: api/Login
         [HttpPost]
-        public async Task<ActionResult<string>> PostLogin(Login login)
+        public async Task<ActionResult> Login([FromBody] usuario login)
         {
-            // Buscar el usuario en la base de datos
-            // y el primer resultado que encuntra lo retorna
-            var usuario = await _context.Usuarios
-                .FirstOrDefaultAsync(u => u.nombre == login.Usuario);
-
-            // Verificar si el usuario existe
-            if (usuario == null)
+            if (login == null || string.IsNullOrEmpty(login.cedula) || string.IsNullOrEmpty(login.contraseña_hash))
             {
-                return Unauthorized("El usuario no existe.");
+                return BadRequest("La cédula y la contraseña son requeridas.");
             }
 
-            // Verificar si la contraseña es correcta utilizando BCrypt
-            // (POR ALGUNA RAZON SI IMPORTO LA LIBRERIA EL VERIFY NO FUNCIONA SOLO SI LO AHGO DIRECTAMENTE)
-            if (!BCrypt.Net.BCrypt.Verify(login.Contraseña, usuario.contraseña_hash))
+            var usuario = await applicationDbContext.usuarios.FirstOrDefaultAsync(u => u.cedula == login.cedula);
+
+            if (usuario == null)
+            {
+                return Unauthorized("Usuario no encontrado.");
+            }
+
+            var encriptar = new Encriptar();
+
+            string password = encriptar.GenerarHash(login.contraseña_hash);
+
+            if (usuario.contraseña_hash != password)
             {
                 return Unauthorized("Contraseña incorrecta.");
             }
 
-            // Si la autenticación es exitosa, puedes generar un token JWT si lo deseas
-            return Ok("Login exitoso");
+            return Ok(new
+            {
+                message = "Login exitoso.",
+                usuario.id_usuario
+            });
         }
+
+
     }
 }

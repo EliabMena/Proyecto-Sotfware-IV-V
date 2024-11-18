@@ -1,36 +1,42 @@
 -- 1. Creación de Tablas Principales
+
 -- Tabla Usuarios
-CREATE TABLE Usuarios (
-    id_usuario SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS Usuarios (
+    id_usuario SERIAL UNIQUE,  -- Identificador único para relaciones
+    cedula VARCHAR(50) PRIMARY KEY,  -- Clave primaria basada en la cédula
     nombre VARCHAR(100) NOT NULL,
-    direccion TEXT,
-    contacto VARCHAR(50),
-    datos_financieros BYTEA, -- Cifrado para mayor seguridad
+    direccion TEXT NOT NULL,
+    contacto VARCHAR(50) NOT NULL,
     rol VARCHAR(20) CHECK (rol IN ('administrador', 'usuario')) NOT NULL,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    contraseña_hash VARCHAR(255) -- Campo para almacenar el hash de la contraseña
+    contraseña_hash VARCHAR(255) NOT NULL, -- Campo para almacenar el hash de la contraseña
+    id_plan INT,
+    FOREIGN KEY (id_plan) REFERENCES Planes_de_Jubilacion(id_plan) ON DELETE SET NULL  -- Si se elimina el plan, el usuario quedará sin plan
 );
 
--- Tabla Planes de Jubilación
-CREATE TABLE Planes_de_Jubilacion (
+-- Tabla Planes de Jubilación (solo lista los planes disponibles)
+CREATE TABLE IF NOT EXISTS Planes_de_Jubilacion (
     id_plan SERIAL PRIMARY KEY,
     tipo_plan VARCHAR(50) NOT NULL,
     monto_minimo_aportacion NUMERIC(10, 2) NOT NULL,
     tasa_interes NUMERIC(5, 2) NOT NULL,
-    descripcion TEXT
+    descripcion TEXT,
+    cuotas_necesarias INT NOT NULL
 );
 
--- Tabla Beneficiarios
-CREATE TABLE Beneficiarios (
+-- Tabla Beneficiarios (Definida antes de Planes_Usuarios)
+CREATE TABLE IF NOT EXISTS Beneficiarios (
     id_beneficiario SERIAL PRIMARY KEY,
+    cedula_beneficiario VARCHAR(50) NOT NULL,
     id_usuario INT REFERENCES Usuarios(id_usuario) ON DELETE CASCADE,
     nombre_beneficiario VARCHAR(100) NOT NULL,
     relacion VARCHAR(50),
-    porcentaje_asignado NUMERIC(5, 2) CHECK (porcentaje_asignado <= 100 AND porcentaje_asignado >= 0)
+    porcentaje_asignado NUMERIC(5, 2) CHECK (porcentaje_asignado <= 100 AND porcentaje_asignado >= 0),
+    CONSTRAINT unique_cedula_beneficiario UNIQUE (cedula_beneficiario) -- Restricción de unicidad
 );
 
 -- Tabla Pagos
-CREATE TABLE Pagos (
+CREATE TABLE IF NOT EXISTS Pagos (
     id_pago SERIAL PRIMARY KEY,
     id_usuario INT REFERENCES Usuarios(id_usuario) ON DELETE CASCADE,
     fecha_pago TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -40,146 +46,99 @@ CREATE TABLE Pagos (
 );
 
 -- Tabla Estados de Cuenta
-CREATE TABLE Estados_de_Cuenta (
+CREATE TABLE IF NOT EXISTS Estados_de_Cuenta (
     id_estado SERIAL PRIMARY KEY,
     id_usuario INT REFERENCES Usuarios(id_usuario) ON DELETE CASCADE,
     saldo_actual NUMERIC(12, 2) DEFAULT 0,
     aportaciones_realizadas NUMERIC(12, 2) DEFAULT 0,
     intereses_acumulados NUMERIC(12, 2) DEFAULT 0,
-    ultima_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ultima_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    cuotas_pagadas integer NOT NULL
 );
 
--- 2. Creación de Roles y Asignación de Permisos
+-- 2. Creación de Roles para la API
 
--- Crea roles para administradores y usuarios
-CREATE ROLE administrador;
-CREATE ROLE usuario;
+-- Crea roles básicos para permisos en las tablas si no existen
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'administrador_api') THEN
+        CREATE ROLE administrador_api;
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'usuario_api') THEN
+        CREATE ROLE usuario_api;
+    END IF;
+END $$;
 
 -- Da permisos a los roles
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO administrador;
-GRANT SELECT ON Usuarios, Planes_de_Jubilacion, Beneficiarios, Pagos, Estados_de_Cuenta TO usuario;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO administrador_api;
+GRANT SELECT ON Usuarios, Planes_de_Jubilacion, Beneficiarios, Pagos, Estados_de_Cuenta TO usuario_api;
 
--- 3. Creación del Usuario API Único
-CREATE USER api_user WITH PASSWORD 'api_password';
-GRANT administrador TO api_user;
+-- 3. Usuario único de conexión para la API
+
+-- Crea un usuario de base de datos exclusivo para la API si no existe
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'api_user') THEN
+        CREATE USER api_user WITH PASSWORD 'api_password';
+        GRANT administrador_api TO api_user;  -- Concede permisos administrativos para la API
+    END IF;
+END $$;
 
 -- 4. Creación de Vistas para Controlar el Acceso
-
--- Vista para el Usuario (sólo ve su propia información)
-CREATE VIEW vista_usuario AS
-SELECT 
+-- Vista de Usuario que muestra todos los usuarios, incluso si no tienen plan
+CREATE OR REPLACE VIEW vista_usuario AS
+SELECT DISTINCT
+    u.cedula,
     u.id_usuario, 
     u.nombre, 
-    p.tipo_plan, 
-    p.monto_minimo_aportacion, 
-    p.tasa_interes, 
-    e.saldo_actual, 
-    e.aportaciones_realizadas, 
-    e.intereses_acumulados, 
+    COALESCE(pj.tipo_plan, 'Sin Plan') AS tipo_plan,  -- Si no tiene plan, muestra 'Sin Plan'
+    COALESCE(pj.monto_minimo_aportacion, 0) AS monto_minimo_aportacion, 
+    COALESCE(pj.tasa_interes, 0) AS tasa_interes,
+    COALESCE(pj.cuotas_necesarias, 0) AS cuotas_necesarias,
+    COALESCE(e.saldo_actual, 0) AS saldo_actual,
+    COALESCE(e.aportaciones_realizadas, 0) AS aportaciones_realizadas,
+    COALESCE(e.intereses_acumulados, 0) AS intereses_acumulados,
+    COALESCE(e.cuotas_pagadas, 0) AS cuotas_pagadas
+FROM Usuarios u
+LEFT JOIN Planes_de_Jubilacion pj ON u.id_plan = pj.id_plan  -- Relacion directa con la tabla Planes_de_Jubilacion
+LEFT JOIN Estados_de_Cuenta e ON u.id_usuario = e.id_usuario;
+
+
+
+
+-- Vista de Beneficiarios
+CREATE OR REPLACE VIEW vista_beneficiarios AS
+SELECT 
+    u.id_usuario,
+    b.cedula_beneficiario, 
     b.nombre_beneficiario, 
     b.relacion, 
     b.porcentaje_asignado
 FROM Usuarios u
-JOIN Planes_de_Jubilacion p ON u.id_usuario = p.id_plan
-JOIN Estados_de_Cuenta e ON u.id_usuario = e.id_usuario
-JOIN Beneficiarios b ON u.id_usuario = b.id_usuario
-WHERE u.nombre = CURRENT_USER;
+LEFT JOIN Beneficiarios b ON u.id_usuario = b.id_usuario;
 
--- Vista de Pagos del Usuario
-CREATE VIEW vista_pagos_usuario AS
-SELECT 
+-- Vista de Pagos para el usuario
+CREATE OR REPLACE VIEW vista_pagos_usuario AS
+SELECT
+    u.id_usuario,
     p.id_pago, 
     p.fecha_pago, 
     p.monto, 
     p.metodo_pago, 
     p.estado
 FROM Pagos p
-JOIN Usuarios u ON p.id_usuario = u.id_usuario
-WHERE u.nombre = CURRENT_USER;
-
--- Vista Completa para el Administrador
-CREATE VIEW vista_administrador AS
-SELECT 
-    u.id_usuario AS usuario_id, 
-    u.nombre AS usuario_nombre, 
-    u.direccion, 
-    u.contacto, 
-    u.datos_financieros, 
-    u.rol, 
-    u.fecha_registro,
-    pl.id_plan AS plan_id, 
-    pl.tipo_plan, 
-    pl.monto_minimo_aportacion, 
-    pl.tasa_interes, 
-    pl.descripcion,
-    e.id_estado AS estado_id, 
-    e.saldo_actual, 
-    e.aportaciones_realizadas, 
-    e.intereses_acumulados, 
-    e.ultima_actualizacion,
-    b.id_beneficiario AS beneficiario_id, 
-    b.nombre_beneficiario, 
-    b.relacion, 
-    b.porcentaje_asignado,
-    pa.id_pago AS pago_id, 
-    pa.fecha_pago, 
-    pa.monto, 
-    pa.metodo_pago, 
-    pa.estado
-FROM Usuarios u
-LEFT JOIN Planes_de_Jubilacion pl ON u.id_usuario = pl.id_plan
-LEFT JOIN Estados_de_Cuenta e ON u.id_usuario = e.id_usuario
-LEFT JOIN Beneficiarios b ON u.id_usuario = b.id_usuario
-LEFT JOIN Pagos pa ON u.id_usuario = pa.id_usuario;
+JOIN Usuarios u ON p.id_usuario = u.id_usuario;
 
 -- 5. Asignación de Permisos sobre las Vistas
-
-GRANT SELECT ON vista_usuario, vista_pagos_usuario TO usuario;
-GRANT SELECT, INSERT, UPDATE, DELETE ON vista_administrador TO administrador;
-
--- 6. Configuración Adicional de Seguridad
--- Revocar acceso directo a las tablas principales para el rol de usuario
-REVOKE ALL ON Usuarios, Planes_de_Jubilacion, Beneficiarios, Pagos, Estados_de_Cuenta FROM usuario;
-
--- Configurar permisos predeterminados para cualquier tabla o secuencia
--- nueva en el esquema "public" para el rol de administrador
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO administrador;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO administrador;
-
-    pl.tipo_plan, 
-    pl.monto_minimo_aportacion, 
-    pl.tasa_interes, 
-    pl.descripcion,
-    e.id_estado AS estado_id, 
-    e.saldo_actual, 
-    e.aportaciones_realizadas, 
-    e.intereses_acumulados, 
-    e.ultima_actualizacion,
-    b.id_beneficiario AS beneficiario_id, 
-    b.nombre_beneficiario, 
-    b.relacion, 
-    b.porcentaje_asignado,
-    pa.id_pago AS pago_id, 
-    pa.fecha_pago, 
-    pa.monto, 
-    pa.metodo_pago, 
-    pa.estado
-FROM Usuarios u
-LEFT JOIN Planes_de_Jubilacion pl ON u.id_usuario = pl.id_plan
-LEFT JOIN Estados_de_Cuenta e ON u.id_usuario = e.id_usuario
-LEFT JOIN Beneficiarios b ON u.id_usuario = b.id_usuario
-LEFT JOIN Pagos pa ON u.id_usuario = pa.id_usuario;
-
--- 5. Asignación de Permisos sobre las Vistas
--- Valida quien puede o no ver las vistas
-GRANT SELECT ON vista_usuario, vista_pagos_usuario TO usuario;
-GRANT SELECT, INSERT, UPDATE, DELETE ON vista_administrador TO administrador;
+GRANT SELECT ON vista_usuario, vista_pagos_usuario TO usuario_api;
+GRANT SELECT, INSERT, UPDATE, DELETE ON vista_administrador TO administrador_api;
 
 -- 6. Configuración Adicional de Seguridad
--- Revocar acceso directo a las tablas principales para el rol de usuario
-REVOKE ALL ON Usuarios, Planes_de_Jubilacion, Beneficiarios, Pagos, Estados_de_Cuenta FROM usuario;
 
--- Configurar permisos predeterminados para cualquier tabla o secuencia
--- nueva en el esquema "public" para el rol de administrador
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO administrador;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO administrador;
+-- Revocar acceso directo a las tablas para el rol de usuario
+REVOKE ALL ON Usuarios, Planes_de_Jubilacion, Beneficiarios, Pagos, Estados_de_Cuenta FROM usuario_api;
+
+-- Permisos predeterminados para nuevas tablas y secuencias en el esquema "public" para el rol de administrador
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO administrador_api;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO administrador_api;
