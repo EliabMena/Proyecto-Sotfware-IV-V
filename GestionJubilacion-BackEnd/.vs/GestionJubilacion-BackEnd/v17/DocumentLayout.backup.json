@@ -1,13 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\",
+  "WorkspaceRootPath": "C:\\Users\\Ramsito\\Desktop\\git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|d:\\git\\proyecto-sotfware-iv-v\\gestionjubilacion-backend\\gestionjubilacion-backend\\controllers\\registrocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|solutionrelative:gestionjubilacion-backend\\controllers\\registrocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|c:\\users\\ramsito\\desktop\\git\\proyecto-sotfware-iv-v\\gestionjubilacion-backend\\gestionjubilacion-backend\\controllers\\planesjubilacioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|solutionrelative:gestionjubilacion-backend\\controllers\\planesjubilacioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|d:\\git\\proyecto-sotfware-iv-v\\gestionjubilacion-backend\\gestionjubilacion-backend\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|c:\\users\\ramsito\\desktop\\git\\proyecto-sotfware-iv-v\\gestionjubilacion-backend\\gestionjubilacion-backend\\models\\planesjubilacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|solutionrelative:gestionjubilacion-backend\\models\\planesjubilacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|c:\\users\\ramsito\\desktop\\git\\proyecto-sotfware-iv-v\\gestionjubilacion-backend\\gestionjubilacion-backend\\contexts\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|solutionrelative:gestionjubilacion-backend\\contexts\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|c:\\users\\ramsito\\desktop\\git\\proyecto-sotfware-iv-v\\gestionjubilacion-backend\\gestionjubilacion-backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|solutionrelative:gestionjubilacion-backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|c:\\users\\ramsito\\desktop\\git\\proyecto-sotfware-iv-v\\gestionjubilacion-backend\\gestionjubilacion-backend\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|solutionrelative:gestionjubilacion-backend\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|c:\\users\\ramsito\\desktop\\git\\proyecto-sotfware-iv-v\\gestionjubilacion-backend\\gestionjubilacion-backend\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF7BACA1-E27F-4F86-8052-93DD49591690}|GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd.csproj|solutionrelative:gestionjubilacion-backend\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -18,32 +34,84 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RegistroController.cs",
-              "DocumentMoniker": "D:\\Git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\Controllers\\RegistroController.cs",
-              "RelativeDocumentMoniker": "GestionJubilacion-BackEnd\\Controllers\\RegistroController.cs",
-              "ToolTip": "D:\\Git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\Controllers\\RegistroController.cs",
-              "RelativeToolTip": "GestionJubilacion-BackEnd\\Controllers\\RegistroController.cs",
-              "ViewState": "AgIAAFkAAAAAAAAAAAAwwGwAAAARAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Ramsito\\Desktop\\git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\appsettings.json",
+              "RelativeDocumentMoniker": "GestionJubilacion-BackEnd\\appsettings.json",
+              "ToolTip": "C:\\Users\\Ramsito\\Desktop\\git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\appsettings.json",
+              "RelativeToolTip": "GestionJubilacion-BackEnd\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-18T20:34:51.963Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "C:\\Users\\Ramsito\\Desktop\\git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\Models\\Usuario.cs",
+              "RelativeDocumentMoniker": "GestionJubilacion-BackEnd\\Models\\Usuario.cs",
+              "ToolTip": "C:\\Users\\Ramsito\\Desktop\\git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\Models\\Usuario.cs",
+              "RelativeToolTip": "GestionJubilacion-BackEnd\\Models\\Usuario.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAgwBgAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-17T23:54:13.752Z",
+              "WhenOpened": "2024-11-18T20:16:48.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PlanesJubilacionController.cs",
+              "DocumentMoniker": "C:\\Users\\Ramsito\\Desktop\\git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\Controllers\\PlanesJubilacionController.cs",
+              "RelativeDocumentMoniker": "GestionJubilacion-BackEnd\\Controllers\\PlanesJubilacionController.cs",
+              "ToolTip": "C:\\Users\\Ramsito\\Desktop\\git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\Controllers\\PlanesJubilacionController.cs",
+              "RelativeToolTip": "GestionJubilacion-BackEnd\\Controllers\\PlanesJubilacionController.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAgwD8AAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T20:14:10.615Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Ramsito\\Desktop\\git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\Contexts\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "GestionJubilacion-BackEnd\\Contexts\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\Ramsito\\Desktop\\git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\Contexts\\ApplicationDbContext.cs",
+              "RelativeToolTip": "GestionJubilacion-BackEnd\\Contexts\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T19:32:16.778Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Usuario.cs",
-              "DocumentMoniker": "D:\\Git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\Models\\Usuario.cs",
-              "RelativeDocumentMoniker": "GestionJubilacion-BackEnd\\Models\\Usuario.cs",
-              "ToolTip": "D:\\Git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\Models\\Usuario.cs",
-              "RelativeToolTip": "GestionJubilacion-BackEnd\\Models\\Usuario.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA0AAAAAAAAAA==",
+              "Title": "PlanesJubilacion.cs",
+              "DocumentMoniker": "C:\\Users\\Ramsito\\Desktop\\git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\Models\\PlanesJubilacion.cs",
+              "RelativeDocumentMoniker": "GestionJubilacion-BackEnd\\Models\\PlanesJubilacion.cs",
+              "ToolTip": "C:\\Users\\Ramsito\\Desktop\\git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\Models\\PlanesJubilacion.cs",
+              "RelativeToolTip": "GestionJubilacion-BackEnd\\Models\\PlanesJubilacion.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAqwAgAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-17T23:53:55.398Z",
+              "WhenOpened": "2024-11-18T19:25:53.489Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "C:\\Users\\Ramsito\\Desktop\\git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "GestionJubilacion-BackEnd\\Controllers\\LoginController.cs",
+              "ToolTip": "C:\\Users\\Ramsito\\Desktop\\git\\Proyecto-Sotfware-IV-V\\GestionJubilacion-BackEnd\\GestionJubilacion-BackEnd\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "GestionJubilacion-BackEnd\\Controllers\\LoginController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T19:24:11.696Z",
               "EditorCaption": ""
             }
           ]
