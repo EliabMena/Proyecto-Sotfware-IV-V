@@ -75,6 +75,26 @@ body {
   margin-bottom: 20px;
   margin-top: 5px;
 }
+.input-container select{
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  background-color: inherit;
+  text-align: center;
+}
+
+.input-container option {
+  background-color: #f1f1f1;
+  color: #333;
+  font-size: 16px;
+  padding: 10px; 
+}
+
+.input-container option:checked {
+  font-weight: bold;
+  background-color: inherit;
+}
 
 .boton{
   width: 170px;

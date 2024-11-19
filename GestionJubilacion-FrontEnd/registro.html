@@ -13,6 +13,11 @@
     <title>Login</title>
   </head>
   <body>
+    <div class="header">
+      <header class="header-container">
+
+      </header>
+    </div>
     <div class="container">
       <div class="form-container">
         <form class="iniciar-sesion">
@@ -55,6 +60,16 @@
             <ion-icon name="call-outline"></ion-icon>
             <input type="text" placeholder="Contacto" name="contacto" />
           </div>
+          <div class="input-container">
+            <ion-icon name="albums-outline"></ion-icon>
+            <select id="opciones" name="opciones">
+              <option value="" disabled selected>Seleccione su Plan</option> 
+              <option value="opcion1">Plan 1</option>
+              <option value="opcion2">Plan 2</option>
+              <option value="opcion3">Plan 3</option>
+          </select>
+          </div>
+
           <button class="boton">Registrarse</button>
         </form>
       </div>
