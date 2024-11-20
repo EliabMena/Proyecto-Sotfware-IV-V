@@ -18,7 +18,7 @@ namespace GestionJubilacion_BackEnd.Controllers
             this.applicationDbContext = applicationDbContext;
         }
 
-        // Endpoint para obtener todos los planes de jubilación
+        // Endpoint para obtener todos los planes de jubilación.
         [HttpGet]
         public async Task<ActionResult> ObtenerPlanes()
         {
@@ -44,7 +44,7 @@ namespace GestionJubilacion_BackEnd.Controllers
             }
         }
 
-        // Endpoint para obtener el plan activo de un usuario por su id_usuario
+        // Endpoint para obtener el plan activo de un usuario por su id_usuario.
         [HttpGet("plan-activo/{id_usuario}")]
         public async Task<ActionResult> ObtenerPlanActivo(int id_usuario)
         {

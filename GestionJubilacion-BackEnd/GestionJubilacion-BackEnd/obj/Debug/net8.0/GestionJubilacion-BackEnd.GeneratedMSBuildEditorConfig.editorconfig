@@ -9,19 +9,11 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = GestionJubilacion_BackEnd
 build_property.RootNamespace = GestionJubilacion_BackEnd
-<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\Ramsito\Desktop\git\Proyecto-Sotfware-IV-V\GestionJubilacion-BackEnd\GestionJubilacion-BackEnd\
-=======
-build_property.ProjectDir = C:\Users\Eliab\Documents\GitHub\Proyecto-Sotfware-IV-V\GestionJubilacion-BackEnd\GestionJubilacion-BackEnd\
->>>>>>> 30d92ebfca25f3518fa44bd52042e4232aa8cf1a
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-<<<<<<< HEAD
 build_property.MSBuildProjectDirectory = C:\Users\Ramsito\Desktop\git\Proyecto-Sotfware-IV-V\GestionJubilacion-BackEnd\GestionJubilacion-BackEnd
-=======
-build_property.MSBuildProjectDirectory = C:\Users\Eliab\Documents\GitHub\Proyecto-Sotfware-IV-V\GestionJubilacion-BackEnd\GestionJubilacion-BackEnd
->>>>>>> 30d92ebfca25f3518fa44bd52042e4232aa8cf1a
 build_property._RazorSourceGeneratorDebug = 
