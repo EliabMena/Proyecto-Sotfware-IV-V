@@ -21,7 +21,7 @@ body {
   background-color: var(--blancoNoTanBlanco);
   border-radius: 8px;
   margin-top: 50px;
-  margin-bottom: 150px;
+  margin-bottom: 50px;
 }
 
 .slider {
@@ -43,7 +43,7 @@ body {
 
 .slide.active {
   opacity: 1;
-  position: relative; /* Asegura que el activo se mantenga visible */
+  position: relative; 
 }
 
 .slide img {
@@ -92,13 +92,21 @@ body {
 }
 
 .logo-container {
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 }
 
 .logo {
   max-width: 200px;
   height: auto;
   border-radius: 15px;
+}
+
+.logo-container p {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .plans-container {
@@ -115,7 +123,6 @@ body {
   border-radius: 8px;
   background-color: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  /* Eliminadas las transiciones y animaciones */
 }
 
 .plans-section {
@@ -126,7 +133,7 @@ body {
 }
 
 .logo-container {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .logo {
@@ -150,7 +157,7 @@ body {
   background-color: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.8s ease, opacity 0.8s ease;
-  opacity: 1; /* Asegurando que sea visible */
+  opacity: 1; 
 }
 
 .plan img {
