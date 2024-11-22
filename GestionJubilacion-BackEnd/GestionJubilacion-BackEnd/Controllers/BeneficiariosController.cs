@@ -106,6 +106,46 @@ namespace GestionJubilacion_BackEnd.Controllers
             }
         }
 
+        [HttpDelete]
+        public async Task<ActionResult> EliminarBeneficiario(int id_usuario, string nombre_beneficiario)
+        {
+            if (id_usuario <= 0)
+            {
+                return BadRequest("El id_usuario debe ser un número válido y mayor a 0.");
+            }
+
+            if (string.IsNullOrEmpty(nombre_beneficiario))
+            {
+                return BadRequest("El nombre del beneficiario es obligatorio.");
+            }
+
+            // Buscar al beneficiario específico
+            var beneficiario = await applicationDbContext.beneficiarios
+                .FirstOrDefaultAsync(b => b.id_usuario == id_usuario && b.nombre_beneficiario == nombre_beneficiario);
+
+            if (beneficiario == null)
+            {
+                return NotFound("No se encontró el beneficiario asociado al usuario.");
+            }
+
+            try
+            {
+                applicationDbContext.beneficiarios.Remove(beneficiario);
+                await applicationDbContext.SaveChangesAsync();
+
+                return Ok("Beneficiario eliminado correctamente.");
+            }
+            catch (Exception e)
+            {
+                var errorMessage = $"Error al eliminar el beneficiario: {e.Message}";
+                if (e.InnerException != null)
+                {
+                    errorMessage += $" - Detalle: {e.InnerException.Message}";
+                }
+                return StatusCode(500, errorMessage);
+            }
+        }
+
     }
 }
 

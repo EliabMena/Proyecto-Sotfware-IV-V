@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../Style/regcss.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-container">
+        <form class="iniciar-sesion">
+          <h2>Iniciar Sesión</h2>
+          <span>Cedula y Contraseña</span>
+          <div class="input-container">
+            <ion-icon name="document-attach-outline"></ion-icon>
+            <input type="text" placeholder="Cedula" name="cedula" id="usuarioCedula"/>
+          </div>
+          <div class="input-container">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <input type="password" placeholder="Contraseña" name="contraseña" id="contraseñaUsuario"/>
+          </div>
+          <a href="#"></a>
+          <button type="button" class="boton" id="btnEnviarActualizacion">Iniciar Sesión</button>
+        </form>
+      </div>
+
+      <div class="form-container">
+        <form class="registro">
+          <h2>Registro</h2>
+          <span>Ingrese sus Datos</span>
+          <div class="input-container">
+            <ion-icon name="person-outline"></ion-icon>
+            <input type="text" placeholder="Nombre" name="Nombre" />
+          </div>
+          <div class="input-container">
+            <ion-icon name="document-attach-outline"></ion-icon>
+            <input type="text" placeholder="Cédula" name="cedula" />
+          </div>
+          <div class="input-container" id="correo">
+            <ion-icon name="mail-outline"></ion-icon>
+            <input type="email" placeholder="Correo" name="correo" />
+          </div>
+          <div class="input-container">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <input type="password" placeholder="Contraseña" name="contraseña" />
+          </div>
+          <div class="input-container">
+            <ion-icon name="home-outline"></ion-icon>
+            <input type="text" placeholder="Dirección" name="direccion" />
+          </div>
+          <div class="input-container">
+            <ion-icon name="call-outline"></ion-icon>
+            <input type="text" placeholder="Contacto" name="contacto" />
+          </div>
+          <div class="input-container">
+            <ion-icon name="albums-outline"></ion-icon>
+            <select id="opciones" name="opciones">
+              <option value="" disabled selected>Seleccione su Plan</option>
+              <option value="opcion1">Plan 1</option>
+              <option value="opcion2">Plan 2</option>
+              <option value="opcion3">Plan 3</option>
+            </select>
+          </div>
+
+          <button class="boton">Registrarse</button>
+        </form>
+      </div>
+
+      <div class="container-bienvenida">
+        <div class="bienvenida-registro bienvenida">
+          <h3>Bienvendio a Vida Aliada</h3>
+          <p>Ingrese sus datos para registrarse</p>
+          <button class="boton" id="btn-registro">Registrarse</button>
+        </div>
+        <div class="bienvenida-sesion bienvenida">
+          <h3>Hola, Bienvenido de Nuevo</h3>
+          <p>Ingrese sus datos para acceder</p>
+          <p>Ya tienes una cuenta? Inicia sesión</p>
+          <button class="boton" id="btn-sesion">Iniciar Sesión</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../JScripts/Registro.js"></script>
+    <script src="../JScripts/usuario.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

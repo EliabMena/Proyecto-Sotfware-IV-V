@@ -1,8 +1,10 @@
 /*Paleta de colores*/
 :root{
-    --Primario: #013D5A;
-    --Secundario: #70BAF9;
-    --blancoNoTanBlanco: #f8f9fa;
+    --Primario: #013D5A; /*MIDNIGHT*/
+    --Secundario: #BDD3CE; /*CELESTE*/
+    --blancoNoTanBlanco: #FCF3E3; /*LIONSMANE*/
+    --SecundarioVerde: #708C69; /*HERB*/
+
     --GrisClarito:#D3D3D3;
     --GrisAgradable:#868e96;
     --GrisColorPetroleo: rgb(53, 53, 53);
@@ -38,7 +40,7 @@ img {
 
 /*BARRA DE NAVEGACION GLOBAL*/
 header {
-    background-color: #ffffff;
+    background-color: var(--blancoNoTanBlanco);
     position: fixed;
     width: 100%;
     z-index: 999; /*NI SE LES PASE POR LA CABEZA CAMBIAR ESTO ATT: ELIAB MENA*/
@@ -47,23 +49,21 @@ header {
 header .header-contenedor {
     width: 100%;
     max-height: 10vh;
-    background-color: #ffffff;
+    background-color: var(--blancoNoTanBlanco);
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin: 1vh;
 }
 
 header .logo {
-    max-width: 30%;
+    max-width: 50%;
     display: flex;
     justify-content: center;
 }
 
 header .logo img {
-    width: 50%;
-    height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* Asegura que la imagen no se deforme */
+    width: auto;
+    height:90px; /* Define una altura específica para evitar saltos */
 }
 
 header ul {
@@ -71,7 +71,7 @@ header ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 header ul li {
@@ -89,7 +89,7 @@ header ul li a {
 }
 
 header .header-menu {
-    width: 100%;
+    /*width: 100%;*/
     margin-right: 10px;
 }
 
@@ -134,7 +134,7 @@ header a:hover{
     display: flex;
     align-content: center;
     justify-content: center;
-    padding-bottom: 2vh;
+    padding-bottom: 6vh;
 }
 .row{
     margin: 2vh;
@@ -148,7 +148,7 @@ ul{
     padding: 0;
 }
 .footer{
-    background-color: var(--GrisColorPetroleo);
+    background-color: var(--Primario);
     margin-top: 2vh;
 }
 .footer-col{
@@ -207,3 +207,106 @@ ul{
     color: #24262b;
     background-color: #ffffff;
 }
+/*Nuevos estilos para el navbar*/
+
+header .social-links {
+    display: flex;
+    gap: 15px;
+}
+
+header .social-links a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 10px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: var(--Primario);
+    font-size: 18px;
+    transition: all 0.5s ease;
+    position: relative;
+}
+
+header .social-links a:hover {
+    background-color: var(--Primario);
+    color: #ffffff;
+}
+
+/* Estilo para el enlace de Cerrar sesión */
+header .logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background-color: var(--Primario);
+    color: var(--blancoNoTanBlanco);
+    padding: 10px 0px;
+    border-radius: 25px;
+    font-size: 1px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 160px;
+    cursor: pointer;
+
+    white-space: nowrap; /* Evitar que el texto se divida en líneas */
+}
+
+header .logout:hover {
+    background-color: var(--Secundario); /* Cambiar color de fondo en hover */
+    color: var(--Primario); /* Cambiar color de texto en hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añadir sombra */
+}
+
+header .logout::after {
+    display: none; /* Eliminar pseudo-elemento */
+}
+
+
+/*Estilo para la barra de busqueda*/
+header .barraBusqueda {
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+    flex-grow: 1; /* Permite que ocupe espacio restante */
+    max-width: 300px; /* Ancho máximo */
+}
+
+header .barraBusqueda input {
+    flex-grow: 1; /* Ajusta el tamaño al espacio disponible */
+    padding: 8px 10px;
+    border: 1px solid var(--GrisAgradable);
+    border-radius: 25px 0 0 25px; /* Bordes redondeados a la izquierda */
+    font-size: 14px;
+    outline: none;
+}
+
+header .barraBusqueda button {
+    padding: 8px 15px;
+    background-color: var(--Primario);
+    color: var(--blancoNoTanBlanco);
+    border: none;
+    border-radius: 0 25px 25px 0; /* Bordes redondeados a la derecha */
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+header .barraBusqueda button:hover {
+    background-color: var(--Secundario);
+    color: var(--Primario);
+}
+
+header .search-bar input::placeholder {
+    color: var(--GrisClarito);
+    font-style: italic;
+}
+
+
+    /*DIFERENTE TIPOS DE LETRAS PARA LOS TITULOS*/
+
+    h2 {
+        font-family: "Imprint MT Shadow";
+    }

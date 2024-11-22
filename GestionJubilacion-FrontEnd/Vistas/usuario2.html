@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../Style/Usuario.css">
+    <link rel="stylesheet" href="../Style/Global.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Area Usuario</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<!--AREA DEL HEADER-->
+<header>
+    <div class="header-contenedor">
+        <!-- Logo principal -->
+        <div class="logo" style="margin-left: 150px"><img src="../Imganes/logo.webp" alt="Logo"></div>
+
+        <!-- Barra bsuqueda -->
+        <form class="barraBusqueda" action="https://www.google.com/search" method="get" target="_blank" style="margin-left: 100px">
+            <input type="text" name="q" placeholder="Buscar en Google..." />
+            <button type="submit">Buscar</button>
+        </form>
+
+        <!-- Menú de navegación -->
+        <div class="header-menu" style="padding-left: 100px">
+            <ul>
+                <li><a href="../Home.html" class="active">Home</a></li>
+                <li><a href="Nosotros.html">Sobre nosotros</a></li>
+            </ul>
+        </div>
+
+        <!-- Iconos de redes sociales -->
+        <div class="social-links" style="padding-left: 200px">
+            <a href="https://www.facebook.com/?locale=es_LA"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/?lang=es"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://www.instagram.com/accounts/login/"><i class="fab fa-instagram"></i></a>
+        </div>
+
+        <!-- LogOut -->
+        <a href="../Home.html" class="logout" style="margin-left: 100px">
+            <div class="logo">
+                <p style="font-size: 14px">Cerrar Sesion</p>
+            </div>
+        </a>
+
+    </div>
+</header>
+<!--FIN AREA DEL HEADER-->
+
+<section class="Main-section">
+    <div class="container-body">
+
+        <!-- Sección Datos de Usuario -->
+        <div class="datos-usuario">
+            <h2>Información Personal</h2>
+            <p class="descripcion">Aquí encontrarás tus datos básicos registrados en nuestro sistema. Asegúrate de mantener esta información actualizada para disfrutar de una mejor experiencia.</p>
+            <div class="usuario-info">
+                <div class="campo">
+                    <label>Nombre Completo:</label>
+                    <p id="nombreUsuario">Juan Pérez Rodríguez</p>
+                </div>
+                <div class="campo">
+                    <label>Correo Electrónico:</label>
+                    <p id="gmailUsuario">juan.perez@gmail.com</p>
+                </div>
+                <div class="campo">
+                    <label>Dirección:</label>
+                    <p id="direccionUsuario">Av. Principal #123, Ciudad</p>
+                </div>
+                <div class="campo">
+                    <label>Saldo Actual:</label>
+                    <p id="saldoActual">$250.75</p>
+                </div>
+                <div class="campo">
+                    <label>Cuotas Pagadas:</label>
+                    <p id="cuotasPagadas">15</p>
+                </div>
+                <div class="campo">
+                    <label>Cuotas Faltantes:</label>
+                    <p id="cuotasFaltantes">5</p>
+                </div>
+            </div>
+            <button id="btnActualizarDatos" class="btn-actualizar-datos">Actualizar Datos</button>
+        </div>
+
+        <!-- Sección Datos del Plan -->
+        <div class="datos-plan">
+            <h2>Detalles del Plan</h2>
+            <p class="descripcion">Consulta los datos de tu plan actual y realiza cambios si lo consideras necesario. Revisa cuidadosamente las condiciones.</p>
+            <div class="plan-info">
+                <div class="campo">
+                    <label>Tipo de Plan:</label>
+                    <p id="nombrePlan">Plan Oro Premium</p>
+                </div>
+                <div class="campo">
+                    <label>Cuotas Totales:</label>
+                    <p id="cuotasTotales">20</p>
+                </div>
+                <div class="campo">
+                    <label>Tasa de Interés:</label>
+                    <p id="tasaInteres">3.5%</p>
+                </div>
+            </div>
+            <button id="btnCambiarPlan" class="btn-cambiar-plan">Solicitar Cambio de Plan</button>
+        </div>
+
+        <!-- Sección Beneficiarios -->
+        <div class="beneficiarios">
+            <h2>Lista de Beneficiarios</h2>
+            <p class="descripcion">Visualiza los beneficiarios registrados en tu cuenta. Puedes actualizar o eliminar beneficiarios según sea necesario.</p>
+            <div id="beneficiariosList" class="beneficiarios-scroll">
+                <div class="beneficiario">
+                    <p><strong>Nombre:</strong> María López</p>
+                    <p><strong>Relación:</strong> Cónyuge</p>
+                    <div class="beneficiario-buttons">
+                        <button class="update-btn">Actualizar</button>
+                        <button class="delete-btn">Eliminar</button>
+                    </div>
+                </div>
+                <div class="beneficiario">
+                    <p><strong>Nombre:</strong> Pedro López</p>
+                    <p><strong>Relación:</strong> Hijo</p>
+                    <div class="beneficiario-buttons">
+                        <button class="update-btn">Actualizar</button>
+                        <button class="delete-btn">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Panel para usuario plan-->
+    <div id="panelActualizarDatos" class="panel">
+        <div class="panel-content">
+            <span class="cerrar" id="cerrarPanel">&times;</span>
+            <h3>Actualizar Información</h3>
+            <form id="formActualizarUsuario">
+
+                <div class="input-container">
+                    <label for="contraseña">Contraseña:</label>
+                    <input type="password" id="contraseña" name="contraseña" placeholder="Ingrese su nueva contraseña" style="margin-left: 74px">
+                </div>
+
+                <div class="input-container">
+                    <label for="contacto">Número de Contacto:</label>
+                    <input type="text" id="contacto" name="contacto" placeholder="Ingrese su contacto">
+                </div>
+
+                <div class="input-container">
+                    <label for="correo">Direccion:</label>
+                    <input type="text" id="direccion" name="direccion" placeholder="Ingrese su direccion" style="margin-left: 90px">
+                </div>
+
+                <div class="input-container">
+                    <label for="correo">Correo Electrónico:</label>
+                    <input type="email" id="correo" name="correo" placeholder="Ingrese su correo" style="margin-left: 16px">
+                </div>
+
+                <button type="button" id="btnEnviarActualizacion" class="btnActualizar">Actualizar</button>
+            </form>
+        </div>
+    </div>
+
+    <!--Panel para actualizar plan-->
+    <div id="panelActualizarPlan" class="panel">
+        <div class="panel-content" style="width: 400px">
+            <span class="cerrar" id="cerrarPanel">&times;</span>
+            <h3>Seleccionar Plan</h3>
+
+            <div class="plan-option" id="plan1">
+                <button class="plan-button" data-plan="1">Plan Basico</button>
+                <div class="plan-details">
+                    <p>Pensado para <br> uebfveyuvbeiuvbeiuvuebvu</p>
+                </div>
+            </div>
+
+            <div class="plan-option" id="plan2">
+                <button class="plan-button" data-plan="2">Plan estandar</button>
+                <div class="plan-details">
+                    <p>Detalles del Plan 2...</p>
+                </div>
+            </div>
+
+            <div class="plan-option" id="plan3">
+                <button class="plan-button" data-plan="3">Plan premium</button>
+                <div class="plan-details">
+                    <p>Detalles del Plan 3...</p>
+                </div>
+            </div>
+
+            <button type="button" id="enviarActualizacionPlan" class="btn-cambiar-plan" style="margin-top: 100px">Enviar Actualización</button>
+        </div>
+    </div>
+
+    <!-- Panel para agregar beneficiario -->
+    <div id="panelAgregarBeneficiario" class="panel">
+        <div class="panel-content" style="height: 450px; width: 500px">
+            <span class="cerrar" id="cerrarPanelAgregar">&times;</span>
+            <h3>Agregar Beneficiario</h3>
+            <form id="formAgregarBeneficiario">
+                <div class="input-container">
+                    <label for="nombreBeneficiario">Nombre del Beneficiario:</label>
+                    <input type="text" id="nombreBeneficiario" placeholder="Ingrese el nombre del beneficiario">
+                </div>
+
+                <div class="input-container">
+                    <label for="relacionBeneficiario" style="margin-right: 120px">Relación:</label>
+                    <input type="text" id="relacionBeneficiario" placeholder="Ingrese la relación">
+                </div>
+
+                <div class="input-container">
+                    <label for="porcentajeBeneficiario">Porcentaje Asignado (%):</label>
+                    <input type="number" id="porcentajeBeneficiario" placeholder="Ingrese el porcentaje asignado" min="1" max="100">
+                </div>
+
+                <div class="input-container">
+                    <label for="cedulaBeneficiario" style="margin-right: 160px">Cédula:</label>
+                    <input type="text" id="cedulaBeneficiario" placeholder="Ingrese la cédula">
+                </div>
+
+                <button type="button" id="btnEnviarBeneficiario" class="btnActualizar" style="margin-left: 170px">Añadir</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Panel para actualizar beneficiario -->
+    <div id="panelActualizarBeneficiario" class="panel">
+        <div class="panel-content" style="height: 300px">
+            <span class="cerrar" id="cerrarPanelActualizarBeneficiario">&times;</span>
+            <h3>Actualizar Beneficiario</h3>
+            <form id="formActualizarBeneficiario" style="margin-left: 95px">
+
+                <div class="input-container">
+                    <label for="relacionBeneficiario">Relación:</label>
+                    <input type="text" id="ActualizarRelacionBeneficiario" style="width: 325px" name="relacionBeneficiario" placeholder="Relación con el usuario" required>
+                </div>
+
+                <div class="input-container">
+                    <label for="porcentajeBeneficiario">Porcentaje Asignado:</label>
+                    <input type="number" style="width: 230px" id="ActualizarporcentajeBeneficiario" name="porcentajeBeneficiario" placeholder="Porcentaje asignado" min="1" max="100" required>
+                </div>
+
+                <button type="button" id="btnActualizarBeneficiario" class="btnActualizar" style="height: 60px">Actualizar Beneficiario</button>
+            </form>
+        </div>
+    </div>
+
+
+</section>
+
+
+<!--PIE DE PÁGINA-->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-col">
+            <h4>Hospital Algo</h4>
+            <ul>
+                <li><a href="Nosotros.html">Sobre Nosotros</a></li>
+                <li><a href="Vistas/404.html">Nuestros Planes</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Ayuda</h4>
+            <ul>
+                <li><a href="../Home.html/#noticias">Noticias</a></li>
+                <li><a href="Vistas/404.html">relacionados</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+<!--FIN PIE DE PAGINA-->
+
+<script src="../JScripts/barraDeNavegacion.js"></script>
+<script src="../JScripts/Validaciones.js"></script>
+<script src="../JScripts/usuario.js"></script>
+</body>
+</html>

@@ -1,0 +1,431 @@
+/* General */
+
+.Main-section {
+    width: 80%;
+    margin: auto;
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+.container-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas con grid es lo mas facil*/
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Sección Datos de Usuario */
+.datos-usuario {
+    grid-column: 1; /* Ocupa toda la primera columna */
+    grid-row: 1 / span 2; /* se expande a 2 filas */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 40px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    /*SOMBRA DE ULTIMO MOMENTO*/
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.datos-usuario h2 {
+    text-align: center;
+    border-bottom: 2px solid var(--Primario);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    color: var(--SecundarioVerde);
+}
+
+/* Sección Datos del Plan */
+.datos-plan {
+    grid-column: 2; /* Ocupa la segunda columna */
+    grid-row: 1; /* Se posiciona en la primera fila */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 40px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    /*SOMBRA DE ULTIMO MOMENTO*/
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.datos-plan h2 {
+    text-align: center;
+    border-bottom: 2px solid var(--Primario);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.btn-cambiar-plan {
+    background-color: var(--Primario);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    align-self: center;
+    transition: background-color 0.3s ease;
+}
+
+.btn-cambiar-plan:hover {
+    background-color: var(--Secundario);
+}
+
+/*ESTOY UTILIZANDO EL ID PORQUE LA VERDAD NO SE DONDE TOQUE EL COLOR Y NO PUEDE CAMBIARLO DE OTRA FORMA*/
+#btnCambiarPlan{
+    background-color: var(--SecundarioVerde);
+    width: 270px;
+    border-radius: 25px;
+}
+
+#btnCambiarPlan:hover{
+    background-color: #218838;
+}
+
+
+/* Sección Beneficiarios */
+
+.beneficiarios {
+    grid-column: 2; /* Ocupa la segunda columna */
+    grid-row: 2; /* Se posiciona en la segunda fila */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 40px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    /*SOMBRA DE ULTIMO MOMENTO*/
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.beneficiarios h2 {
+    text-align: center;
+    border-bottom: 2px solid var(--Primario);
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+}
+
+.beneficiarios-scroll {
+    max-height: 200px; /* Altura máxima para el bloque */
+    overflow-y: auto; /* Habilita el desplazamiento vertical */
+    padding-right: 10px; /* Espaciado para evitar solapar con el scroll */
+}
+
+.beneficiarios-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.beneficiarios-scroll::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+.beneficiarios-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
+}
+
+.lista-beneficiarios {
+    display: flex;
+    flex-direction: column;
+}
+
+.beneficiario {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #f8f8f8;
+    position: relative;
+    margin: 20px;
+}
+
+.beneficiario p {
+    margin: 0;
+}
+
+.beneficiario-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.beneficiario button {
+    background-color: #b86464;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.beneficiario button:hover {
+    background-color: red;
+}
+
+.beneficiario .update-btn {
+    background-color: var(--SecundarioVerde);
+}
+
+.beneficiario .update-btn:hover {
+    background-color: #1e7e34;
+}
+
+.btn-agregar-beneficiario {
+    background-color: var(--SecundarioVerde);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    align-self: center;
+    transition: background-color 0.3s ease;
+    margin-left: 140px;
+}
+
+.btn-agregar-beneficiario:hover {
+    background-color: #218838;
+}
+
+/* Botón Agregar */
+#btnAgregar {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 15px;
+    background-color: #28A745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#btnAgregar:hover {
+    background-color: #1e7e34;
+}
+
+/* Ajustes para texto al lado en lugar de abajo */
+.campo {
+    display: flex;
+    align-items: center; /* Alineación vertical */
+    justify-content: space-between; /* Separación horizontal */
+    margin-bottom: 18px;
+}
+
+.campo label {
+    font-weight: bold;
+    font-size: 20px;
+    flex: 0 0 40%; /* Ocupa el 40% del espacio disponible */
+}
+
+.campo p {
+    flex: 1; /* El valor ocupará el resto del espacio */
+    text-align: left; /* Asegura que el texto del valor esté alineado a la izquierda */
+    margin: 0;
+}
+
+/* MODIFICACIONES PARA LOS TEXTOS*/
+
+/* Títulos */
+h2 {
+    font-size: 1.8rem;
+    color: var(--SecundarioVerde);
+    margin-bottom: 10px;
+}
+
+/* Descripciones */
+.descripcion {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Párrafos */
+p {
+    font-size: 1.2rem;
+    margin: 5px 0;
+}
+
+/* Márgenes y rellenos */
+.campo {
+    margin-bottom: 15px;
+}
+
+.datos-usuario,
+.datos-plan,
+.beneficiarios {
+    padding: 30px;
+}
+
+.beneficiario {
+    margin: 10px 0;
+    padding: 15px;
+}
+
+/*BOTON PARA ATULIZAR USUARIO*/
+
+.btn-actualizar-datos {
+    background-color: var(--SecundarioVerde);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    align-self: center;
+    transition: background-color 0.3s ease;
+}
+
+.btn-actualizar-datos:hover {
+    background-color: #218838;
+}
+
+/* Estilos para el panel emergente */
+.panel {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6); /* Más oscuro para resaltar el contenido */
+    justify-content: center;
+    align-items: center;
+}
+
+.panel-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 30px;
+    border: 2px solid #444;
+    border-radius: 25px;
+    width: 35%;
+    height: 480px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.input-container{
+    margin: 20px;
+}
+
+.plan-option {
+    margin-bottom: 15px;
+}
+
+.panel input{
+    width: 400px;
+    height: 30px;
+    font-size: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
+    border-color: black;
+}
+
+.panel-content h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px; /* Tamaño del título más grande */
+    color: #333;
+}
+
+.panel-content label {
+    margin-bottom: 15px;
+    font-size: 18px; /* Texto más grande */
+    color: #444;
+    padding: 10px; /* Espaciado interno */
+
+
+}
+
+.btnActualizar{
+    width: 160px;
+    border-radius: 20px;
+    height: 35px;
+    font-size: 18px;
+    margin-left: 260px;
+    margin-top: 30px;
+}
+
+.btnActualizar:hover{
+    background-color: #007BFF;
+    color: #FFFFFF;
+}
+
+.plan-button {
+    width: 55%;
+    padding: 10px;
+    font-size: 18px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 88px;
+}
+
+.plan-details {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+}
+
+.plan-button:hover {
+    background-color: #0056b3;
+}
+
+.btn-cambiar-plan {
+    width: 190px;
+    border-radius: 10px;
+    height: 55px;
+    font-size: 18px;
+    margin: 30px auto;
+    display: block;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-cambiar-plan:hover {
+    background-color: #218838;
+}
+
+.cerrar {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cerrar:hover,
+.cerrar:focus {
+    color: #444;
+    text-decoration: none;
+}
+
+
+
+
+
+
+

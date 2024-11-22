@@ -1,0 +1,45 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+.sobre-nosotros {
+    padding: 50px 20px;
+    text-align: center;
+}
+.sobre-nosotros .contenedor {
+    max-width: 1200px;
+    margin: auto;
+}
+.perfil-contenedor {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.perfil {
+    width: 500px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #FFFFFF;
+}
+.perfil img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+.perfil h3 {
+    margin: 15px 0 10px;
+}
+.perfil p {
+    font-size: 14px;
+    color: #555;
+}
+.descripcion-empresa {
+    max-width: 800px;
+    margin: auto;
+    margin-bottom: 40px;
+    font-size: 16px;
+    color: #333;
+}

@@ -14,6 +14,8 @@ CREATE TABLE IF NOT EXISTS Usuarios (
     cedula VARCHAR(50) PRIMARY KEY,  -- Clave primaria basada en la cédula
     nombre VARCHAR(100) NOT NULL,
     direccion TEXT NOT NULL,
+    gmail TEXT NOT NULL,
+    foto_perfil BYTEA,
     contacto VARCHAR(50) NOT NULL,
     rol VARCHAR(20) CHECK (rol IN ('administrador', 'usuario')) NOT NULL,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -90,19 +92,21 @@ SELECT DISTINCT
     u.cedula,
     u.id_usuario, 
     u.nombre, 
-    COALESCE(pj.tipo_plan, 'Sin Plan') AS tipo_plan,  -- Si no tiene plan, muestra 'Sin Plan'
+    u.direccion,
+    u.gmail,
+    u.contacto,
+    COALESCE(pj.tipo_plan, 'Sin Plan') AS tipo_plan,  
     COALESCE(pj.monto_minimo_aportacion, 0) AS monto_minimo_aportacion, 
     COALESCE(pj.tasa_interes, 0) AS tasa_interes,
     COALESCE(pj.cuotas_necesarias, 0) AS cuotas_necesarias,
     COALESCE(e.saldo_actual, 0) AS saldo_actual,
     COALESCE(e.aportaciones_realizadas, 0) AS aportaciones_realizadas,
     COALESCE(e.intereses_acumulados, 0) AS intereses_acumulados,
-    COALESCE(e.cuotas_pagadas, 0) AS cuotas_pagadas
+    COALESCE(e.cuotas_pagadas, 0) AS cuotas_pagadas,
+    u.foto_perfil  -- Campo agregado
 FROM Usuarios u
-LEFT JOIN Planes_de_Jubilacion pj ON u.id_plan = pj.id_plan  -- Relacion directa con la tabla Planes_de_Jubilacion
+LEFT JOIN Planes_de_Jubilacion pj ON u.id_plan = pj.id_plan
 LEFT JOIN Estados_de_Cuenta e ON u.id_usuario = e.id_usuario;
-
-
 
 
 -- Vista de Beneficiarios

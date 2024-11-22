@@ -42,6 +42,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "GestionJubilacion_BackEnd.Controllers.BeneficiariosController",
+    "Method": "EliminarBeneficiario",
+    "RelativePath": "api/Beneficiarios",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id_usuario",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "nombre_beneficiario",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "GestionJubilacion_BackEnd.Controllers.LoginController",
     "Method": "Login",
     "RelativePath": "api/Login",

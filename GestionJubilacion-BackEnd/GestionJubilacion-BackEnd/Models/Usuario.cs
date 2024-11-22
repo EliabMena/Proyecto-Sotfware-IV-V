@@ -23,5 +23,6 @@ namespace GestionJubilacion_BackEnd.Models
         public DateTime fecha_registro { get; set; } = DateTime.Now;
 
         public int id_plan { get; set; }
+        public string gmail { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace GestionJubilacion_BackEnd.Controllers
         {
             if (nuevoUsuario == null || string.IsNullOrEmpty(nuevoUsuario.cedula) ||
                 string.IsNullOrEmpty(nuevoUsuario.nombre) || string.IsNullOrEmpty(nuevoUsuario.direccion) ||
-                string.IsNullOrEmpty(nuevoUsuario.contacto) || string.IsNullOrEmpty(nuevoUsuario.contraseña_hash))
+                string.IsNullOrEmpty(nuevoUsuario.contacto) || string.IsNullOrEmpty(nuevoUsuario.contraseña_hash) || string.IsNullOrEmpty(nuevoUsuario.gmail))
             {
                 return BadRequest("Todos los campos son requeridos.");
             }
@@ -90,9 +90,14 @@ namespace GestionJubilacion_BackEnd.Controllers
             try
             {
                 // Solo actualiza los campos que se reciban en el cuerpo del PATCH
-                if (!string.IsNullOrEmpty(usuario.nombre))
+                if (usuario.id_plan.HasValue)
                 {
-                    usuarioActual.nombre = usuario.nombre;
+                    if (usuario.id_plan.Value < 1 || usuario.id_plan.Value > 3)
+                    {
+                        return BadRequest("El id_plan debe ser un número entre 1 y 3.");
+                    }
+
+                    usuarioActual.id_plan = usuario.id_plan.Value;
                 }
                 if (!string.IsNullOrEmpty(usuario.direccion))
                 {
@@ -106,6 +111,9 @@ namespace GestionJubilacion_BackEnd.Controllers
                 {
                     var encriptar = new Encriptar();
                     usuarioActual.contraseña_hash = encriptar.GenerarHash(usuario.contraseña_hash);
+                } if (!string.IsNullOrEmpty(usuario.gmail))
+                {
+                    usuarioActual.gmail = usuario.gmail;
                 }
 
                 //siempre es la bendita fecha
@@ -116,7 +124,7 @@ namespace GestionJubilacion_BackEnd.Controllers
                 applicationDbContext.usuarios.Update(usuarioActual);
                 await applicationDbContext.SaveChangesAsync();
 
-                return Ok("Usuario actualizado correctamente");
+                return Ok(new { message = "Usuario actualizado correctamente" });
             }
             catch (Exception e)
             {
