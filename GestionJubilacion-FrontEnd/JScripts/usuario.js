@@ -517,3 +517,4 @@ input.addEventListener("change", (e) => {
 // Llamar a la función al cargar la página
 document.addEventListener("DOMContentLoaded", loadUserData);
 
+//NO SE PUDO COMPLETAR EL METODO PARA CARGAR

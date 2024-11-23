@@ -27,6 +27,12 @@ header{
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #FFFFFF;
+    transition: ease-in-out 0.3s;
+}
+.perfil:hover{
+    box-shadow: 20px 28px 28px rgba(0, 0, 0, 0.5);
+    position: relative;
+    margin-right: 15px;
 }
 .perfil img {
     width: 300px;
