@@ -17,17 +17,16 @@ document.addEventListener("DOMContentLoaded", () => {
         //    return;
        // }
 
-        // Crear el payload en formato JSON con todos los campos requeridos por la API
         const loginData = {
             cedula: cedula,
-            id_usuario: 0, // Puedes ajustar este valor según el comportamiento de la API
+            id_usuario: 0,
             contraseña_hash: contraseña,
-            nombre: "", // Puedes agregar datos reales si los tienes
+            nombre: "",
             direccion: "",
             rol: "",
             contacto: "",
-            fecha_registro: new Date().toISOString(), // Generar la fecha actual
-            id_plan: 0, // Puedes ajustar según el contexto
+            fecha_registro: new Date().toISOString(),
+            id_plan: 0,
             gmail: ""
         };
 
@@ -331,6 +330,62 @@ document.getElementById("btnActualizarBeneficiario").onclick = async function ()
     }
 };
 
+//REGISTRO
+
+async function registrarUsuario(event) {
+    event.preventDefault();
+
+    // Captura los datos del formulario
+    const nombre = document.getElementById('regNombre').value;
+    const cedula = document.getElementById('regCedula').value;
+    const correo = document.getElementById('regCorreo').value;
+    const contraseña = document.getElementById('regContraseña').value;
+    const direccion = document.getElementById('regDireccion').value;
+    const contacto = document.getElementById('regContacto').value;
+    const idPlan = document.getElementById('regOpciones').value;
+
+    // Crear el objeto de usuario
+    const nuevoUsuario = {
+        cedula: cedula,
+        nombre: nombre,
+        gmail: correo,
+        contraseña_hash: contraseña,  // En backEnd se encripta con SHA256
+        direccion: direccion,
+        contacto: contacto,
+        id_plan: idPlan ? parseInt(idPlan.replace('opcion', '')) : null
+    };
+
+    try {
+        const response = await fetch('http://localhost:5235/api/Registro', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(nuevoUsuario),
+        });
+
+        // Manejo de la respuesta de la API
+        if (response.ok) {
+            const data = await response.json();
+            alert(data.message || 'Usuario registrado exitosamente.');
+        } else if (response.status === 400) {
+            const error = await response.text();
+            alert('Error: ' + error);
+        } else if (response.status === 409) {
+            alert('Error: El usuario ya existe.');
+        } else {
+            alert('Error desconocido. Intenta nuevamente.');
+        }
+    } catch (error) {
+        alert('Error al conectarse con la API: ' + error.message);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('registroForm');
+    form.addEventListener('submit', registrarUsuario);
+});
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -445,6 +500,19 @@ document.getElementById("enviarActualizacionPlan").addEventListener("click", asy
     });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Cargar Imagenes
+const input = document.getElementById("perfilInput");
+const  imagen = document.getElementById("VistaImagen");
+
+input.addEventListener("change", (e) => {
+    if (e.target.files.length) { // Cambiado de file a files
+        const src = URL.createObjectURL(e.target.files[0]); // Accede al primer archivo seleccionado
+        imagen.src = src; // Cambia la imagen al archivo cargado
+    }
+});
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Llamar a la función al cargar la página
 document.addEventListener("DOMContentLoaded", loadUserData);

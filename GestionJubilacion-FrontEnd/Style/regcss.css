@@ -169,3 +169,37 @@ body {
 .container.toggle .bienvenida-registro{
   transform: translateX(-100%);
 }
+
+/*Ultimo momento*/
+
+.boton-flecha {
+  position: absolute; /* Posición absoluta para que puedas colocarlo en un lugar específico */
+  top: 100px; /* Ajusta según tu diseño */
+  left: 180px; /* Ajusta según tu diseño */
+}
+
+.flecha-izquierda {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-color: #013D5A; /* Ajusta el color según tu diseño */
+  border-radius: 50%;
+  text-align: center;
+  line-height: 55px; /* Centra el icono verticalmente */
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.flecha-izquierda::before {
+  content: "<--"; /* Agrega la flecha hacia la izquierda */
+}
+
+.flecha-izquierda:hover {
+  background-color: #BDD3CE; /* Cambia el color al pasar el mouse */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transform: scale(1.1); /* Efecto de ampliación */
+}

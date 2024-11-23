@@ -61,9 +61,9 @@ header .logo {
 }
 
 header .logo img {
-    object-fit: contain; /* Asegura que la imagen no se deforme */
+    object-fit: contain; /* La imagen mantiene cubre el contenedor */
     width: auto;
-    height:90px; /* Define una altura específica para evitar saltos */
+    height:140px;
 }
 
 header ul {

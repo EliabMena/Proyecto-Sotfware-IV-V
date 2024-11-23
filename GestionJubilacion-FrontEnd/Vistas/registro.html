@@ -13,6 +13,11 @@
     <title>Login</title>
   </head>
   <body>
+
+  <div class="boton-flecha">
+    <a href="../Home.html" class="flecha-izquierda"></a>
+  </div>
+
     <div class="container">
       <div class="form-container">
         <form class="iniciar-sesion">
@@ -37,39 +42,39 @@
           <span>Ingrese sus Datos</span>
           <div class="input-container">
             <ion-icon name="person-outline"></ion-icon>
-            <input type="text" placeholder="Nombre" name="Nombre" />
+            <input type="text" placeholder="Nombre" name="Nombre" id="regNombre"/>
           </div>
           <div class="input-container">
             <ion-icon name="document-attach-outline"></ion-icon>
-            <input type="text" placeholder="Cédula" name="cedula" />
+            <input type="text" placeholder="Cédula" name="cedula" id="regCedula"/>
           </div>
           <div class="input-container" id="correo">
             <ion-icon name="mail-outline"></ion-icon>
-            <input type="email" placeholder="Correo" name="correo" />
+            <input type="email" placeholder="Correo" name="correo" id="regCorreo"/>
           </div>
           <div class="input-container">
             <ion-icon name="lock-closed-outline"></ion-icon>
-            <input type="password" placeholder="Contraseña" name="contraseña" />
+            <input type="password" placeholder="Contraseña" name="contraseña" id="regContraseña"/>
           </div>
           <div class="input-container">
             <ion-icon name="home-outline"></ion-icon>
-            <input type="text" placeholder="Dirección" name="direccion" />
+            <input type="text" placeholder="Dirección" name="direccion" id="regDireccion"/>
           </div>
           <div class="input-container">
             <ion-icon name="call-outline"></ion-icon>
-            <input type="text" placeholder="Contacto" name="contacto" />
+            <input type="text" placeholder="Contacto" name="contacto" id="regContacto"/>
           </div>
           <div class="input-container">
             <ion-icon name="albums-outline"></ion-icon>
-            <select id="opciones" name="opciones">
+            <select id="regOpciones" name="opciones">
               <option value="" disabled selected>Seleccione su Plan</option>
-              <option value="opcion1">Plan 1</option>
-              <option value="opcion2">Plan 2</option>
-              <option value="opcion3">Plan 3</option>
+              <option value="opcion1" id="opcion1">Plan Basico</option>
+              <option value="opcion2" id="opcion2">Plan Estandar</option>
+              <option value="opcion3" id="opcion3">Plan Premiun</option>
             </select>
           </div>
 
-          <button class="boton">Registrarse</button>
+          <button class="boton" type="submit">Registrarse</button>
         </form>
       </div>
 

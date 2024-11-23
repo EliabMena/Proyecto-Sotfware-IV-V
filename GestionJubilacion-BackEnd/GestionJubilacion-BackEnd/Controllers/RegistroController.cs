@@ -62,13 +62,12 @@ namespace GestionJubilacion_BackEnd.Controllers
             }
             catch (Exception ex)
             {
-                // Log de error completo con detalles de la excepción interna
                 var errorMessage = $"Error al guardar los cambios: {ex.Message}";
                 if (ex.InnerException != null)
                 {
                     errorMessage += $" - Detalle: {ex.InnerException.Message}";
                 }
-                return StatusCode(500, errorMessage); // Devolver el error detallado
+                return StatusCode(500, errorMessage);
             }
         }
 

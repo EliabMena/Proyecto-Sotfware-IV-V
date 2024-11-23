@@ -1,6 +1,10 @@
 body {
     font-family: 'Poppins', sans-serif;
 }
+
+header{
+    margin-top: -25px;
+}
 .sobre-nosotros {
     padding: 50px 20px;
     text-align: center;
@@ -19,15 +23,16 @@ body {
     width: 500px;
     text-align: center;
     border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #FFFFFF;
 }
 .perfil img {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
+    width: 300px;
+    height: 300px;
+    border-radius: 9999px;
+    object-fit: cover;
 }
 .perfil h3 {
     margin: 15px 0 10px;
