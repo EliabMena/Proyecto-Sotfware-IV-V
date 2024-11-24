@@ -147,7 +147,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO administrado
 
 CREATE OR REPLACE VIEW vista_historial_pagos AS
 SELECT 
-    u.id_usuario,  -- Cambiar "cedula" por "id_usuario"
+    u.id_usuario,
     u.nombre AS nombre_usuario, 
     p.id_pago, 
     p.fecha_pago, 
