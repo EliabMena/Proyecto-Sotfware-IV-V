@@ -1,4 +1,4 @@
-
+//USUARIO
 //INICIO DE SESION
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("btnEnviarActualizacion").addEventListener("click", async (e) => {

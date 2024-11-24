@@ -29,9 +29,7 @@ namespace GestionJubilacion_BackEnd.Controllers
 
             try
             {
-                var usuario = await applicationDbContext.VistaUsuario
-                .FromSqlRaw("SELECT * FROM vista_usuario WHERE id_usuario = {0}", id_usuario)
-                .FirstOrDefaultAsync();
+                var usuario = await applicationDbContext.VistaUsuario.FromSqlRaw("SELECT * FROM vista_usuario WHERE id_usuario = {0}", id_usuario).FirstOrDefaultAsync();
 
                 if (usuario == null)
                 {

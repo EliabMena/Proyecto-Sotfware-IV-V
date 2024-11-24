@@ -1,4 +1,5 @@
 
+//VALIDACIONES
 function verificarContacto(contacto) {
     const regex = /^6\d{3}-\d{4}$/;
 

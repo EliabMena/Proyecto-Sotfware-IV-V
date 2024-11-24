@@ -173,16 +173,16 @@ body {
 /*Ultimo momento*/
 
 .boton-flecha {
-  position: absolute; /* Posición absoluta para que puedas colocarlo en un lugar específico */
-  top: 100px; /* Ajusta según tu diseño */
-  left: 180px; /* Ajusta según tu diseño */
+  position: absolute;
+  top: 100px;
+  left: 180px;
 }
 
 .flecha-izquierda {
   display: inline-block;
   width: 60px;
   height: 60px;
-  background-color: #013D5A; /* Ajusta el color según tu diseño */
+  background-color: #013D5A;
   border-radius: 50%;
   text-align: center;
   line-height: 55px; /* Centra el icono verticalmente */

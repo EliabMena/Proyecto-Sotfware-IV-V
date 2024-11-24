@@ -79,6 +79,38 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "GestionJubilacion_BackEnd.Controllers.PagoController",
+    "Method": "InsertarPago",
+    "RelativePath": "api/Pago",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nuevoPago",
+        "Type": "GestionJubilacion_BackEnd.Models.Pago",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionJubilacion_BackEnd.Controllers.PagoController",
+    "Method": "HistoriaPagos",
+    "RelativePath": "api/Pago",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id_usuario",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "GestionJubilacion_BackEnd.Controllers.PlanesController",
     "Method": "ObtenerPlanes",
     "RelativePath": "api/Planes",

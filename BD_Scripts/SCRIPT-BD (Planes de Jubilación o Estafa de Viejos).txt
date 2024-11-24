@@ -144,3 +144,17 @@ REVOKE ALL ON Usuarios, Planes_de_Jubilacion, Beneficiarios, Pagos, Estados_de_C
 -- Permisos predeterminados para nuevas tablas y secuencias en el esquema "public" para el rol de administrador
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO administrador_api;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO administrador_api;
+
+CREATE OR REPLACE VIEW vista_historial_pagos AS
+SELECT 
+    u.id_usuario,  -- Cambiar "cedula" por "id_usuario"
+    u.nombre AS nombre_usuario, 
+    p.id_pago, 
+    p.fecha_pago, 
+    p.monto, 
+    p.metodo_pago, 
+    p.estado
+FROM Pagos p
+JOIN Usuarios u ON p.id_usuario = u.id_usuario -- Relación por id_usuario
+ORDER BY p.fecha_pago DESC;
+

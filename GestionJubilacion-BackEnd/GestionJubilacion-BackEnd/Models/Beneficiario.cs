@@ -10,13 +10,15 @@ namespace GestionJubilacion_BackEnd.Models
 
         [ForeignKey("usuarios")]
         public int id_usuario { get; set; }
-
+        [Required]
+        [StringLength(50)]
         public string nombre_beneficiario { get; set; }
-
+        [Required]
+        [StringLength(50)]
         public string relacion { get; set; }
-
+        [Range(0, 90)]
         public decimal porcentaje_asignado { get; set; }
-
+        [Required]
         public string cedula_beneficiario { get; set; }
 
     }
