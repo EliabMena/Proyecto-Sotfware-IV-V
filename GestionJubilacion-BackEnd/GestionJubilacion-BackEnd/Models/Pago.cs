@@ -16,7 +16,7 @@ namespace GestionJubilacion_BackEnd.Models
         [StringLength(50)]
         public string metodo_pago { get; set; }
         [Required]
-        [StringLength(15)]
+        [RegularExpression("^(pendiente|completado)$")]
         public string estado { get; set; } = "pendiente"; // Valor por defecto
     }
 

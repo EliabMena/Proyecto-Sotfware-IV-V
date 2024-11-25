@@ -19,6 +19,7 @@ namespace GestionJubilacion_BackEnd.Models
         [Range(0, 90)]
         public decimal porcentaje_asignado { get; set; }
         [Required]
+        [RegularExpression(@"^((\d{1,2}|[E|N|PE])-?\d{1,4}-?\d{1,5})$")]
         public string cedula_beneficiario { get; set; }
 
     }
