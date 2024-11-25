@@ -1,0 +1,56 @@
+INSERT INTO Planes_de_Jubilacion (tipo_plan, monto_minimo_aportacion, tasa_interes, descripcion, cuotas_necesarias) VALUES
+('Plan Basico', 50.00, 1.5, 'Plan básico con baja aportación y menor rendimiento.', 120),
+('Plan Estandar', 100.00, 2.0, 'Plan estándar con equilibrio entre aportación y rendimiento.', 100),
+('Plan Premiun', 200.00, 3.0, 'Plan prémium con alta aportación y mayor rendimiento.', 80);
+
+INSERT INTO Usuarios (cedula, nombre, direccion, gmail, contacto, rol, contraseña_hash, id_plan) VALUES
+('8-978-580', 'Alejandro Mena', 'Panama', 'Alejandro@gmail.com', '6128-8639', 'usuario', 'ef994e7262a78b97c039adf58214ee7df1076824a7e47538948ba61ae02b05c7', 1),
+('1-111-111', 'Maria Lopez', 'Calle 2', 'maria.lopez@mail.com', '6000-0000', 'usuario', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 3),
+('1-111-112', 'Carlos Diaz', 'Calle 3', 'carlos.diaz@mail.com', '6000-0001', 'usuario', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 3),
+('1-111-113', 'Ana Torres', 'avenida peru', 'ana.torres@mail.com', '6000-0002', 'usuario', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1),
+('1-111-114', 'Luis Gomez', 'Panama Oeste', 'luis.gomez@mail.com', '6000-0003', 'usuario', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 2),
+('1-111-115', 'Carmen Vega', '24 dic', 'carmen.vega@mail.com', '6000-0004', 'usuario', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 3),
+('1-111-116', 'Pedro Castillo', 'Panama norte', 'pedro.castillo@mail.com', '6000-0005', 'usuario', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 1),
+('1-111-117', 'Elena Martinez', 'Colon', 'elena.martinez@mail.com', '6000-0006', 'usuario', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 2),
+('1-111-118', 'Miguel Hernandez', 'Chiriqui', 'miguel.hernandez@mail.com', '6000-0007', 'usuario', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 2),
+('1-111-119', 'Laura Fernandez', 'peru', 'laura.fernandez@mail.com', '6999-9999', 'usuario', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1);
+
+INSERT INTO Beneficiarios (cedula_beneficiario, id_usuario, nombre_beneficiario, relacion, porcentaje_asignado) VALUES
+('1-111-121', 1, 'Sofia Perez', 'Hija', 50.0),
+('1-111-122', 1, 'Antonio Perez', 'Hijo', 50.0),
+('1-111-123', 2, 'Jose Lopez', 'Padre', 60.0),
+('1-111-124', 3, 'Gojo Satoru', 'Amigo', 12.0),
+('1-111-125', 2, 'Robute Gulliman', 'Padre', 15.0),
+('1-111-126', 4, 'Julio Cesar', 'Padre', 20.0),
+('1-111-127', 5, 'Juana de Arco', 'madre', 10.0),
+('1-111-128', 6, 'ryomen sukuna', 'Padre', 20.0),
+('1-111-129', 8, 'naruto', 'hermano', 30.0),
+('1-111-130', 7, 'Lucia Lopez', 'hija', 40.0);
+
+INSERT INTO Pagos (id_usuario, monto, metodo_pago, estado) VALUES
+(1, 60.00, 'Transferencia', 'completado'),
+(2, 120.00, 'Tarjeta', 'completado'),
+(3, 200.00, 'Efectivo', 'completado'),
+(4, 50.00, 'Transferencia', 'completado'),
+(2, 100.00, 'Tarjeta', 'completado'),
+(6, 100.00, 'Efectivo', 'completado'),
+(1, 90.00, 'Transferencia', 'completado'),
+(9, 120.00, 'Tarjeta', 'completado'),
+(10, 200.00, 'Efectivo', 'completado'),
+(4, 50.00, 'Transferencia', 'completado'),
+(5, 100.00, 'Tarjeta', 'completado');
+
+INSERT INTO Estados_de_Cuenta (id_usuario, saldo_actual, aportaciones_realizadas, intereses_acumulados, cuotas_pagadas) VALUES
+(1, 5000.00, 300.00, 5.00, 5),
+(2, 1000.00, 600.00, 10.00, 10),
+(3, 1500.00, 1200.00, 20.00, 15),
+(4, 300.00, 200.00, 3.00, 3),
+(5, 600.00, 400.00, 6.00, 6),
+(2, 1500.00, 1200.00, 20.00, 15),
+(1, 300.00, 200.00, 3.00, 3),
+(7, 600.00, 400.00, 6.00, 6),
+(10, 1500.00, 1200.00, 20.00, 15),
+(9, 300.00, 200.00, 3.00, 3),
+(8, 600.00, 400.00, 6.00, 6),
+(6, 900.00, 700.00, 12.00, 9);
+
