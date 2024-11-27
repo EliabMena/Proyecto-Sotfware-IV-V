@@ -1,74 +1,4 @@
 //USUARIO
-//INICIO DE SESION
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("btnEnviarActualizacion").addEventListener("click", async (e) => {
-        e.preventDefault(); // Prevenir el comportamiento por defecto del formulario
-
-        // Obtener valores de los campos
-        const cedula = document.getElementById("usuarioCedula").value.trim();
-        const contraseña = document.getElementById("contraseñaUsuario").value.trim();
-
-        // Validar campos
-        if (!cedula || !contraseña) {
-            alert("Por favor, complete todos los campos.");
-            return;}
-       //  else if(!ValidarCedula(cedula)){
-        //    alert("Cedula no valida")
-        //    return;
-       // }
-
-        const loginData = {
-            cedula: cedula,
-            id_usuario: 0,
-            contraseña_hash: contraseña,
-            nombre: "",
-            direccion: "",
-            rol: "",
-            contacto: "",
-            fecha_registro: new Date().toISOString(),
-            id_plan: 0,
-            gmail: ""
-        };
-
-        let usuarioId = parseInt(null);
-
-        try {
-            // Llamar a la API
-            const response = await fetch("http://localhost:5235/api/Login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(loginData)
-            });
-
-            // Verificar si la respuesta es JSON
-            let responseData;
-            try {
-                responseData = await response.json(); // Intentar leer la respuesta como JSON
-            } catch (error) {
-                // Si la respuesta no es un JSON válido, leerla como texto
-                responseData = await response.text();
-            }
-
-            if (response.ok) {
-                usuarioId = responseData.id_usuario; // Asignar el ID recibido
-                localStorage.setItem('usuarioId', usuarioId);//GUARDAMOS EL ID EN LA MEMORIA LOCAL DEL CLIENTE
-                window.location.href = "../Vistas/usuario2.html";
-
-            } else if (response.status === 401) {
-                alert(responseData || "Usuario o contraseña incorrectos.");
-            } else {
-                alert(responseData || "Usuario o contraseña incorrectos.");
-            }
-        } catch (error) {
-            console.error("Error en la solicitud:", error);
-            alert("No se pudo conectar con el servidor.");
-        }
-    });
-});
-
-
 //CARGAR DATOS DEL USUARIO
 async function loadUserData() {
     try {
@@ -130,12 +60,12 @@ async function loadUserData() {
             beneficiariosContainer.appendChild(mensaje);
         }
 
-            // Mostrar botón para agregar nuevo beneficiario
-            const botonAgregar = document.createElement("button");
-            botonAgregar.textContent = "Agregar Nuevo Beneficiario";
-            botonAgregar.classList.add("btn-agregar-beneficiario");
-            botonAgregar.addEventListener("click", agregarBeneficiario); // Llamar función para agregar beneficiario
-            beneficiariosContainer.appendChild(botonAgregar);
+        // Mostrar botón para agregar nuevo beneficiario
+        const botonAgregar = document.createElement("button");
+        botonAgregar.textContent = "Agregar Nuevo Beneficiario";
+        botonAgregar.classList.add("btn-agregar-beneficiario");
+        botonAgregar.addEventListener("click", agregarBeneficiario); // Llamar función para agregar beneficiario
+        beneficiariosContainer.appendChild(botonAgregar);
 
 
     } catch (error) {
@@ -330,63 +260,6 @@ document.getElementById("btnActualizarBeneficiario").onclick = async function ()
     }
 };
 
-//REGISTRO
-
-async function registrarUsuario(event) {
-    event.preventDefault();
-
-    // Captura los datos del formulario
-    const nombre = document.getElementById('regNombre').value;
-    const cedula = document.getElementById('regCedula').value;
-    const correo = document.getElementById('regCorreo').value;
-    const contraseña = document.getElementById('regContraseña').value;
-    const direccion = document.getElementById('regDireccion').value;
-    const contacto = document.getElementById('regContacto').value;
-    const idPlan = document.getElementById('regOpciones').value;
-
-    // Crear el objeto de usuario
-    const nuevoUsuario = {
-        cedula: cedula,
-        nombre: nombre,
-        gmail: correo,
-        contraseña_hash: contraseña,  // En backEnd se encripta con SHA256
-        direccion: direccion,
-        contacto: contacto,
-        id_plan: idPlan ? parseInt(idPlan.replace('opcion', '')) : null
-    };
-
-    try {
-        const response = await fetch('http://localhost:5235/api/Registro', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(nuevoUsuario),
-        });
-
-        // Manejo de la respuesta de la API
-        if (response.ok) {
-            const data = await response.json();
-            alert(data.message || 'Usuario registrado exitosamente.');
-        } else if (response.status === 400) {
-            const error = await response.text();
-            alert('Error: ' + error);
-        } else if (response.status === 409) {
-            alert('Error: El usuario ya existe.');
-        } else {
-            alert('Error desconocido. Intenta nuevamente.');
-        }
-    } catch (error) {
-        alert('Error al conectarse con la API: ' + error.message);
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('registroForm');
-    form.addEventListener('submit', registrarUsuario);
-});
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // OBTEBNER EL NUMERO DEL PLAN.
@@ -398,15 +271,22 @@ document.querySelectorAll(".plan-button").forEach(button => {
 });
 
 //ACTUALIZAR PLAN
-document.getElementById("enviarActualizacionPlan").addEventListener("click", async function() {
+document.getElementById("enviarActualizacionPlan").addEventListener("click", async function () {
     // Verificar si se ha seleccionado un plan
     if (!selectedPlan) {
         alert("Por favor, selecciona un plan antes de enviar.");
         return;
     }
 
+    // Recuperar el ID de usuario desde localStorage
+    const usuarioId = localStorage.getItem("usuarioId");
+    if (!usuarioId) {
+        alert("No se encontró un usuario válido en la memoria local. Por favor, inicia sesión nuevamente.");
+        return;
+    }
+
     // Hacer la solicitud PATCH a la API con el plan seleccionado
-    const response = await fetch('http://localhost:5235/api/Registro/actualizar?id_usuario=1', {
+    const response = await fetch(`http://localhost:5235/api/Registro/actualizar?id_usuario=${usuarioId}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
@@ -420,6 +300,7 @@ document.getElementById("enviarActualizacionPlan").addEventListener("click", asy
     if (response.ok) {
         alert("Plan actualizado correctamente");
         document.getElementById("panelActualizarPlan").style.display = "none";
+        await loadUserData(usuarioId);
     } else {
         const errorMessage = await response.text();
         alert("Error al actualizar el plan: " + errorMessage);
@@ -430,36 +311,36 @@ document.getElementById("enviarActualizacionPlan").addEventListener("click", asy
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //EVENTOS PARA MOSTRAR LOS PANELES DE ACTUALIZACION......
-    //PANLE DE USUARIO....
-    document.getElementById("btnActualizarDatos").addEventListener("click", function() {
-        document.getElementById("panelActualizarDatos").style.display = "flex";
-    });
-    document.getElementById("cerrarPanel").addEventListener("click", function() {
-        document.getElementById("panelActualizarDatos").style.display = "none";
-    });
-    window.addEventListener("click", function(event) {
-        const panel = document.getElementById("panelActualizarDatos");
-        if (event.target === panel) {
-            panel.style.display = "none";
-        }
-    });
+//PANLE DE USUARIO....
+document.getElementById("btnActualizarDatos").addEventListener("click", function() {
+    document.getElementById("panelActualizarDatos").style.display = "flex";
+});
+document.getElementById("cerrarPanel").addEventListener("click", function() {
+    document.getElementById("panelActualizarDatos").style.display = "none";
+});
+window.addEventListener("click", function(event) {
+    const panel = document.getElementById("panelActualizarDatos");
+    if (event.target === panel) {
+        panel.style.display = "none";
+    }
+});
 
-    //PANEL PARA ACTUALIZAR EL PLAN....
-    document.getElementById("btnCambiarPlan").addEventListener("click", function() {
-        document.getElementById("panelActualizarPlan").style.display = "flex";
-    });
-    document.getElementById("cerrarPanel").addEventListener("click", function() {
-        document.getElementById("panelActualizarPlan").style.display = "none";
-    });
-    window.addEventListener("click", function(event) {
-        const panel = document.getElementById("panelActualizarPlan");
-        if (event.target === panel) {
-            panel.style.display = "none";
-        }
-    });
+//PANEL PARA ACTUALIZAR EL PLAN....
+document.getElementById("btnCambiarPlan").addEventListener("click", function() {
+    document.getElementById("panelActualizarPlan").style.display = "flex";
+});
+document.getElementById("cerrarPanel").addEventListener("click", function() {
+    document.getElementById("panelActualizarPlan").style.display = "none";
+});
+window.addEventListener("click", function(event) {
+    const panel = document.getElementById("panelActualizarPlan");
+    if (event.target === panel) {
+        panel.style.display = "none";
+    }
+});
 
-    //Paneles para actualizar y agregar beneficiarios
-    function agregarBeneficiario() {
+//Paneles para actualizar y agregar beneficiarios
+function agregarBeneficiario() {
     const panel = document.getElementById("panelAgregarBeneficiario");
     panel.style.display = "flex";
 
@@ -469,7 +350,7 @@ document.getElementById("enviarActualizacionPlan").addEventListener("click", asy
         panel.style.display = "none";
     });
 }
-    function updateBeneficiario() {
+function updateBeneficiario() {
     const panel = document.getElementById("panelActualizarBeneficiario");
     panel.style.display = "flex";
     document.getElementById("cerrarPanelActualizarBeneficiario").onclick = function () {
@@ -481,23 +362,23 @@ document.getElementById("enviarActualizacionPlan").addEventListener("click", asy
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //EVENTO DESPLEGAR EN ACTUALIZAR PLAN
-    const planButtons = document.querySelectorAll(".plan-button");
-    planButtons.forEach(button => {
-        button.addEventListener("click", function() {
-            const planDetails = this.nextElementSibling;
-            const allDetails = document.querySelectorAll(".plan-details");
+const planButtons = document.querySelectorAll(".plan-button");
+planButtons.forEach(button => {
+    button.addEventListener("click", function() {
+        const planDetails = this.nextElementSibling;
+        const allDetails = document.querySelectorAll(".plan-details");
 
-            // Cerrar todos los detalles antes de abrir el seleccionado
-            allDetails.forEach(detail => {
-                if (detail !== planDetails) {
-                    detail.style.display = "none";
-                }
-            });
-
-            // Alternar visibilidad del detalle correspondiente
-            planDetails.style.display = planDetails.style.display === "block" ? "none" : "block";
+        // Cerrar todos los detalles antes de abrir el seleccionado
+        allDetails.forEach(detail => {
+            if (detail !== planDetails) {
+                detail.style.display = "none";
+            }
         });
+
+        // Alternar visibilidad del detalle correspondiente
+        planDetails.style.display = planDetails.style.display === "block" ? "none" : "block";
     });
+});
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
